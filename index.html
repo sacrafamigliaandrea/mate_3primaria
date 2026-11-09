@@ -161,7 +161,7 @@ h1,h2,h3,h4{font-weight:inherit}
 .p-testa{display:flex;align-items:flex-end;gap:2vw}
 .p-fig{height:clamp(90px,15vh,170px);object-fit:contain;animation:galleggia 3.6s ease-in-out infinite}
 .p-testa .indietro{margin-left:auto;align-self:center}
-.tappe{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:minmax(0,1fr);gap:1.6vw;min-height:0}
+.tappe{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(0,1fr);gap:1.6vw;min-height:0}
 .tappa{position:relative;display:flex;flex-direction:column;gap:.9vh;min-height:0;padding:2.2vh 1.4vw 1.8vh;border-radius:22px;background:var(--pan);border:2px solid transparent;text-align:left;transition:transform .3s cubic-bezier(.3,1.4,.5,1),box-shadow .3s,border-color .3s,background .3s;overflow:hidden}
 .tappa .tn{width:clamp(40px,3vw,54px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:var(--blu);color:#fff;font:700 clamp(19px,1.4vw,26px)/1 var(--fd)}
 .tappa .tt{font:600 clamp(18px,1.32vw,26px)/1.12 var(--fd);color:var(--testo)}
@@ -371,6 +371,27 @@ h1,h2,h3,h4{font-weight:inherit}
 .prova-riga{display:flex;align-items:center;gap:.8vw;padding:1.2vh 1.4vw;border-radius:16px;background:var(--verde-t);color:var(--verde);font:600 clamp(20px,1.6vw,32px)/1.2 var(--fd)}
 .prova-riga svg{width:1.3em;height:1.3em}
 .prova-riga small{font:400 clamp(14px,1vw,18px)/1.3 var(--f);color:var(--testo2)}
+/* tappa 3: quante in tutto (tastierino) · tappe 5 e 6: come si chiama (tre nomi) */
+.quanti{display:flex;flex-direction:column;align-items:center;gap:1.4vh}
+.q-dom{font:600 clamp(20px,1.6vw,32px)/1.25 var(--fd);color:var(--testo)}
+.q-dom b{color:var(--blu)}
+.q-riga{display:flex;align-items:center;gap:1vw;flex-wrap:wrap;justify-content:center}
+.q-box{min-width:2.6em;height:1.4em;padding:0 .3em;border-radius:16px;display:grid;place-items:center;border:3px dashed var(--blu);background:var(--blu-t);font:700 clamp(36px,3vw,60px)/1 var(--fd);color:var(--blu);font-variant-numeric:tabular-nums;animation:aspetta 1.2s ease-in-out infinite}
+.q-box.ok{border:3px solid var(--verde);background:var(--verde-t);color:var(--verde);animation:none}
+.q-box.no{border:3px solid var(--ambra);background:var(--ambra-t);color:var(--ambra2);animation:scuoti .45s}
+.q-nome{font:600 clamp(22px,1.8vw,36px)/1 var(--fd);color:var(--testo2)}
+.q-tasti{flex-wrap:wrap;justify-content:center;gap:.6vw}
+.sbtn.icona svg{width:clamp(22px,1.6vw,30px);height:clamp(22px,1.6vw,30px)}
+.sbtn.invia{background:var(--blu);border-color:var(--blu);color:#fff;box-shadow:0 4px 0 var(--blu2)}
+.sbtn.invia small{color:#fff}
+.copri{display:flex;flex-direction:column;align-items:center;gap:.4vh;margin-left:1vw}
+.copri small{font:700 clamp(10px,.68vw,12px)/1 var(--f);letter-spacing:.12em;text-transform:uppercase;color:var(--testo3)}
+.mini i.coperta{background:var(--sup2);border-style:dashed;border-color:var(--filo);color:transparent}
+.mini i.resta{border-color:var(--blu);color:var(--blu);box-shadow:0 0 0 2px var(--blu)}
+.sbtn.parola{min-width:clamp(150px,11vw,220px);font-size:clamp(22px,1.6vw,32px)}
+.sbtn.ok{border-color:var(--verde);background:var(--verde-t);color:var(--verde);box-shadow:0 4px 0 var(--verde)}
+.sbtn.no{border-color:var(--ambra);background:var(--ambra-t);color:var(--ambra2);box-shadow:0 4px 0 var(--ambra);animation:scuoti .45s}
+.r-chiedi{display:inline-grid;place-items:center;width:1.7em;height:1.7em;border-radius:50%;background:var(--evid);border:2px solid var(--oro);color:var(--blu);font-weight:700;animation:aspetta 1.2s ease-in-out infinite}
 
 /* la striscia delle carte rimaste nel mazzo, lente, LEGGI */
 .banco{display:flex;align-items:stretch;gap:1vw;min-width:0}
@@ -561,7 +582,7 @@ h1,h2,h3,h4{font-weight:inherit}
     <p class="h-sub">Gira le carte e scegli il posto: ogni cifra vale secondo dove la metti.</p>
   </header>
   <div class="strade">
-    <button class="strada" data-m="allena" tabindex="-1"><span class="s-occh">Per tutti · senza punti</span><span class="s-tit">Allenamento</span><span class="s-sub">Sei tappe, dal numero più grande alla prova delle operazioni. In ogni tappa: due numeri insieme, poi da solo.</span><span class="s-vai">entra<span data-ico="avanti" style="width:1.1em;display:inline-block"></span></span><span class="s-corpo"><img class="s-fig" id="figHome" alt="La guida dell'allenamento"><span class="s-demo"><span class="demo-riga" id="demoHome"></span><span class="demo-nota">Una carta alla volta: dove la metti? Nelle migliaia il 7 vale 7000, nelle unità vale 7.</span></span></span></button>
+    <button class="strada" data-m="allena" tabindex="-1"><span class="s-occh">Per tutti · senza punti</span><span class="s-tit">Allenamento</span><span class="s-sub">Sette tappe, dal numero più grande alla moltiplicazione. In ogni tappa: due numeri insieme, poi da solo.</span><span class="s-vai">entra<span data-ico="avanti" style="width:1.1em;display:inline-block"></span></span><span class="s-corpo"><img class="s-fig" id="figHome" alt="La guida dell'allenamento"><span class="s-demo"><span class="demo-riga" id="demoHome"></span><span class="demo-nota">Una carta alla volta: dove la metti? Nelle migliaia il 7 vale 7000, nelle unità vale 7.</span></span></span></button>
     <button class="strada" data-m="sfida" tabindex="-1"><span class="s-occh">Casata contro casata</span><span class="s-tit">Sfida</span><span class="s-sub" id="subSfida"></span><span class="s-vai">entra<span data-ico="avanti" style="width:1.1em;display:inline-block"></span></span><span class="s-volti" id="voltiSfida"></span><span class="classifica"><span class="pan-tit">Classifica di oggi <span class="live" id="liveHome"><i></i>live</span></span><span class="righe" id="righeHome"></span></span></button>
   </div>
   <footer class="piede">
@@ -575,7 +596,7 @@ h1,h2,h3,h4{font-weight:inherit}
 <section id="percorso" class="screen">
   <header class="p-testa">
     <img class="p-fig" id="figPercorso" alt="">
-    <div><p class="occhiello">Allenamento · uguale per tutte le casate</p><h1 class="h-tit piccolo">Il percorso</h1><p class="h-sub">Sei tappe. La regola l'ha spiegata la maestra: qui ci si allena, tanto.</p></div>
+    <div><p class="occhiello">Allenamento · uguale per tutte le casate</p><h1 class="h-tit piccolo">Il percorso</h1><p class="h-sub">Sette tappe. La regola l'ha spiegata la maestra: qui ci si allena, tanto.</p></div>
     <button class="indietro" id="pIndietro" tabindex="-1"></button>
   </header>
   <div class="tappe" id="tappe"></div>
@@ -648,19 +669,22 @@ h1,h2,h3,h4{font-weight:inherit}
    del laboratorio sono condivisi; le impostazioni passano dall'indirizzo (?durata=8…).
 
    LA MECCANICA (una sola, sempre la stessa): IL TIRO DELLE CIFRE (roll & write).
-   Una carta obiettivo dice che numero costruire. Il mazzo ha 10 carte, le cifre 0-9,
-   ognuna una volta sola. Si gira una carta e la si mette SUBITO in una casella della
-   tabella k h da u (o nel cestino, un posto solo): non si sposta più. A tabella piena
-   la guida legge il numero in lettere e mostra il migliore possibile con le stesse
-   carte uscite (la sfortuna non conta).
+   Una carta obiettivo dice che numero costruire. Il mazzo ha 12 carte: le cifre 1-9 una
+   volta, lo 0 tre volte (servono i numeri come 7001, 3600, 2000 delle attività della
+   maestra). Si gira una carta e la si mette SUBITO in una casella della tabella
+   k h da u (o nel cestino, un posto solo): non si sposta più. A tabella piena la guida
+   legge il numero in lettere e mostra il migliore possibile con le stesse carte uscite
+   (la sfortuna non conta).
 
    DUE MOMENTI
-   - ALLENAMENTO (per tutti, senza casata, senza punti): 6 tappe. Ogni tappa:
+   - ALLENAMENTO (per tutti, senza casata, senza punti): 7 tappe. Ogni tappa:
      2 numeri INSIEME (carte tutte scoperte, si spostano; l'aiuto cresce a ogni
      tentativo) e 5 numeri DA SOLO (una carta alla volta). Guida: l'avatar di Andrea,
      che dice solo le istruzioni e le correzioni del fumetto.
-   - SFIDA (casata contro casata, a tempo): 8 minuti, un numero per livello (tappe 1-5),
+   - SFIDA (casata contro casata, a tempo): 8 minuti, un numero per livello (tappe 1-6),
      stesse carte per tutti i Mac nella giornata. Classifica della giornata "a testa".
+   Dopo la costruzione, a seconda della tappa: il segno (tappa 4), «quante centinaia
+   in tutto?» (tappa 3), il calcolo in colonna + il nome del termine + la prova (5 e 6).
    Metodo: Dewey (si impara facendo), Vygotskij (insieme → da solo, aiuto che si ritira),
    correzione socratica (la guida indica la colonna da guardare, non la soluzione),
    metacognizione finale («come hai deciso dove mettere le cifre?»).
@@ -670,11 +694,11 @@ const CONFIG = {
   CHIAVE_DOCENTE: 'sacrafamiglia',  // deve coincidere con quella nell'Apps Script (serve solo per azzerare)
   DURATA_SFIDA: 8 * 60,             // secondi (?durata=10 nell'indirizzo per cambiarla)
   NUMERI_INSIEME: 2,                // allenamento: numeri INSIEME per tappa
-  NUMERI_SOLO: 5,                   // allenamento: numeri DA SOLO per tappa (la tappa 5 ne ha 3)
+  NUMERI_SOLO: 5,                   // allenamento: numeri DA SOLO per tappa (le tappe 5 e 6 ne hanno 3)
   POLL_MS: 6000,
   AZZERA_OGNI_NOTTE: true,          // la classifica riparte da zero a mezzanotte (ora italiana); deve coincidere con l'Apps Script
 };
-const PUNTI = { migliore: 20, obiettivo: 10, valido: 5, segno: 5, segnoDopo: 2, calcolo: 5, calcoloDopo: 2, prova: 5 };
+const PUNTI = { migliore: 20, obiettivo: 10, valido: 5, segno: 5, segnoDopo: 2, quanti: 5, quantiDopo: 2, calcolo: 5, calcoloDopo: 2, termine: 5, termineDopo: 2, prova: 5 };
 
 /* ---------- PRNG deterministico (RIGIOCABILITA.md §5.1) ---------- */
 function cyrb53(s, seed = 0) {
@@ -718,7 +742,7 @@ let RUN = 0;
 /* impostazioni della sessione (il docente le mette nell'indirizzo: il pannello costruisce il link) */
 const IMP = {
   durata: clamp(Math.round((+QS.get('durata') || CONFIG.DURATA_SFIDA / 60) * 60), 60, 30 * 60),
-  partenza: clamp(+QS.get('livello') || 1, 1, 5),
+  partenza: clamp(+QS.get('livello') || 1, 1, 6),   // 6 = numero dei livelli della sfida (LIVELLI)
   seed: (QS.get('seed') || '').trim(),
   modo: QS.get('modo'),
 };
@@ -807,41 +831,63 @@ function inLettere(n) {
 }
 
 /* =====================================================================
-   IL PERCORSO — sei tappe; la sfida usa le tappe 1-5 come livelli
+   IL PERCORSO — sette tappe; la sfida usa le tappe 1-6 come livelli (non il ripasso)
    ===================================================================== */
 const TAPPE = [
   { id: 'grande', nome: 'Il più grande, il più piccolo', sotto: 'chi vale di più', es: '9 · 7 · 4 · 1 → 9741', desc: 'Le carte sono le stesse, cambia il posto: a sinistra una cifra vale di più.' },
-  { id: 'valore', nome: 'Quanto vale la cifra', sotto: 'il posto dà il valore', es: 'il 4 vale 400', desc: 'Una cifra deve valere proprio quello che dice la carta: tienile libero il posto.' },
-  { id: 'vicino', nome: 'Il più vicino a…', sotto: 'il numero in tanti modi', es: '36 h e 5 u', desc: 'Il numero arriva in lettere, in k h da u, in centinaia: costruisci il più vicino.' },
-  { id: 'confronto', nome: 'Maggiore, minore, uguale', sotto: 'i segni > < =', es: '4044 > 3999', desc: 'Costruisci il numero e confrontalo: prima le migliaia, poi le centinaia.' },
-  { id: 'operazioni', nome: 'Addizione e sottrazione', sotto: 'i termini e la prova', es: 'addendo + addendo = somma', desc: 'Due numeri con le carte, il calcolo in colonna, poi la prova.', solo: 3 },
-  { id: 'ripasso', nome: 'Il grande ripasso', sotto: 'tutte le carte obiettivo', es: 'tappe 1-5 mescolate', desc: 'Carte obiettivo di tutte le tappe: scegli tu la strategia giusta.' },
+  { id: 'valore', nome: 'Quanto vale la cifra', sotto: 'il posto dà il valore', es: 'il 4 vale 40 decine', desc: 'Una cifra deve valere proprio quello che dice la carta: tienile libero il posto.' },
+  { id: 'vicino', nome: 'Il più vicino a…', sotto: 'il numero in tanti modi', es: '36 h e 5 u', desc: 'Il numero arriva in lettere, in k h da u, in centinaia: costruisci il più vicino. Poi: quante centinaia ci sono in tutto?' },
+  { id: 'confronto', nome: 'Maggiore, minore, uguale', sotto: 'i segni > < =', es: '1001 > 999', desc: 'Costruisci il numero e confrontalo: prima conta le cifre, poi le migliaia, poi le centinaia.' },
+  { id: 'operazioni', nome: 'Addizione e sottrazione', sotto: 'i termini e la prova', es: 'addendo + addendo = somma', desc: 'Due numeri con le carte, il calcolo in colonna, il nome dei termini, poi la prova.', solo: 3 },
+  { id: 'moltiplicazione', nome: 'La moltiplicazione', sotto: 'fattori e prodotto', es: '476 × 8', desc: 'Un numero di tre cifre per una cifra: dove conviene la carta più grande? Poi il calcolo in colonna.', solo: 3 },
+  { id: 'ripasso', nome: 'Il grande ripasso', sotto: 'tutte le carte obiettivo', es: 'tappe 1-6 mescolate', desc: 'Carte obiettivo di tutte le tappe: scegli tu la strategia giusta.' },
 ];
 const TAPPA = Object.fromEntries(TAPPE.map((t, i) => [t.id, { ...t, n: i + 1 }]));
-const LIVELLI = TAPPE.slice(0, 5);
+const LIVELLI = TAPPE.filter(t => t.id !== 'ripasso');
 
 /* =====================================================================
    LE CARTE OBIETTIVO — generate da regole (niente banca da esaurire).
-   Ogni round: tipo, righe della tabella, mazzo (0-9 mescolato), testo della carta,
+   Ogni round: tipo, righe della tabella, mazzo (MAZZO mescolato), testo della carta,
    score(numeri, cifre) = quanto è buono un numero (più alto = meglio; -1e9 = non vale),
    obiettivo(...) = traguardo da 10 punti, istr = l'istruzione per la fase INSIEME.
+   Le carte uguali (gli 0) sono distinte dal POSTO nel mazzo o nella mano, mai dal valore.
    ===================================================================== */
 const NONVALE = -1e9;
 const numHtml = n => `<span class="num">${n}</span>`;
 const chip = (v, p) => `<span class="chip p-${p}">${v}<small>${p}</small></span>`;
-function mazzoNuovo(r) { return shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], r); }
-/* porta le cifre richieste dentro le prime "entro" carte del mazzo, in posti a caso */
+const MAZZO = [0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9];   // lo 0 tre volte: 7001, 3600, 2000 (lo zero che tiene il posto)
+function mazzoNuovo(r) { return shuffle(MAZZO, r); }
+/* porta le cifre richieste dentro le prime "entro" carte del mazzo, in posti a caso
+   (toglie UNA carta per ogni cifra richiesta: lo 0 si può chiedere fino a tre volte) */
 function conCifreAvanti(mazzo, cifre, r, entro) {
-  const m = mazzo.filter(d => !cifre.includes(d));
+  const m = [...mazzo];
+  cifre.forEach(d => m.splice(m.indexOf(d), 1));
   const posti = shuffle([...Array(entro).keys()], r).slice(0, cifre.length).sort((a, b) => a - b);
   const cf = shuffle(cifre, r);
   posti.forEach((p, i) => m.splice(p, 0, cf[i]));
   return m;
 }
-function numeroDistinto(r) {   // 4 cifre diverse, la prima non è 0 (si può costruire con le carte)
-  const k = intra(1, 9, r), resto = shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8, 9].filter(d => d !== k), r).slice(0, 3);
-  return numDa([k, ...resto]);
+/* con tre 0 nel mazzo le prime S carte devono contenere almeno «serve» cifre diverse da 0,
+   altrimenti nessun numero è valido (0 0 0 6 per una moltiplicazione, 0 4 0 0 se il 4 va nelle
+   centinaia): scambia l'ultimo 0 delle prime S con la prima cifra non 0 che viene dopo */
+function assicuraCifre(R, S, serve) {
+  const m = R.mazzo;
+  while (m.slice(0, S).filter(Boolean).length < serve) {
+    const z = m.lastIndexOf(0, S - 1), j = m.findIndex((d, k) => k >= S && d !== 0);
+    [m[z], m[j]] = [m[j], m[z]];
+  }
 }
+/* un numero di 4 cifre che si può fare con il mazzo: la prima non è 0; le cifre da 1 a 9
+   una volta sola, lo 0 fino a tre volte (7001, 3600, 5030, come nelle attività della maestra) */
+function numeroCostruibile(r) {
+  const k = intra(1, 9, r), resto = [...MAZZO]; resto.splice(resto.indexOf(k), 1);
+  return numDa([k, ...shuffle(resto, r).slice(0, 3)]);
+}
+/* i termini delle operazioni: per riga (primo, secondo, risultato) e per operazione */
+const TERMINI = { '+': ['addendo', 'addendo', 'somma'], '-': ['minuendo', 'sottraendo', 'differenza'], '×': ['fattore', 'fattore', 'prodotto'] };
+const TERMINI_RUOLO = [['addendo', 'minuendo', 'fattore'], ['addendo', 'sottraendo', 'fattore'], ['somma', 'differenza', 'prodotto']];
+const SIMB = { '+': '+', '-': '−', '×': '×' };
+const opera = (a, b, op) => op === '+' ? a + b : op === '-' ? a - b : a * b;
 /* lo stesso numero in tanti modi (tappa 3) */
 function forma(T, tipo, r) {
   const [k, h, da, u] = cifreDi(T), parti = [[k, 'k'], [h, 'h'], [da, 'da'], [u, 'u']];
@@ -855,13 +901,19 @@ function forma(T, tipo, r) {
     const hc = Math.floor(T / 100), resto = T % 100;
     return { html: `${numHtml(hc)} h${resto ? ` e ${numHtml(resto)} u` : ''}`, breve: `${hc} h${resto ? ` e ${resto} u` : ''}` };
   }
+  if (tipo === 'cambioDa') {   // con le decine: 360 da e 5 u = 3605
+    const dc = Math.floor(T / 10), u = T % 10;
+    return { html: `${numHtml(dc)} da${u ? ` e ${numHtml(u)} u` : ''}`, breve: `${dc} da${u ? ` e ${u} u` : ''}` };
+  }
   const add = parti.map(([v, p]) => v * VAL[p]).filter(Boolean);   // additiva
   return { html: add.map(numHtml).join(' + '), breve: add.join(' + ') };
 }
-const valoreTesto = (d, p, tipo) => tipo === 'nome' ? `${d} ${d === 1 ? NOMEP1[p] : NOMEP[p]}` : tipo === 'decine' ? `${d * VAL[p] / 10} decine` : `${d * VAL[p]}`;
+const valoreTesto = (d, p, tipo) => tipo === 'nome' ? `${d} ${d === 1 ? NOMEP1[p] : NOMEP[p]}` : tipo === 'decine' ? `${d * VAL[p] / 10} decine` : tipo === 'centinaia' ? `${d * VAL[p] / 100} centinaia` : `${d * VAL[p]}`;
+/* le equivalenze «in tutto»: in 3605 ci sono 36 centinaia, 360 decine (tappa 3, dopo la costruzione) */
+const quanteInTutto = (n, p) => Math.floor(n / VAL[p]);
 
 function genera(id, r, fase, i = 0) {
-  if (id === 'ripasso') { const R = genera(pick(['grande', 'valore', 'vicino', 'confronto', 'operazioni'], r), r, fase, i); R.ripasso = true; return R; }
+  if (id === 'ripasso') { const R = genera(pick(['grande', 'valore', 'vicino', 'confronto', 'operazioni', 'moltiplicazione'], r), r, fase, i); R.ripasso = true; return R; }
   const ins = fase === 'insieme';
   const R = { id, fase, righe: [POS4], op: null, mazzo: mazzoNuovo(r) };
   const N = n => n[0];
@@ -875,10 +927,12 @@ function genera(id, r, fase, i = 0) {
   }
   if (id === 'valore') {
     R.tipo = 'cifra';
-    R.d = intra(1, 9, r); R.p = ins ? pick(['h', 'da'], r) : pick(POS4, r); R.sec = ins ? (i === 0 ? 'max' : 'min') : pick(['max', 'min'], r);
-    const tipoV = ins ? 'valore' : pick(['valore', 'nome', 'valore', 'nome', ...(R.p === 'k' || R.p === 'h' ? ['decine'] : [])], r);
+    R.d = intra(1, 9, r); R.p = ins ? (i === 0 ? pick(['h', 'da'], r) : 'h') : pick(POS4, r); R.sec = ins ? (i === 0 ? 'max' : 'min') : pick(['max', 'min'], r);
+    // il valore detto in tanti modi: 400 · 4 centinaia · 40 decine (500 = 50 decine, come nel Wordwall)
+    const tipoV = ins ? (i === 0 ? 'valore' : 'decine') : pick({ k: ['valore', 'nome', 'decine', 'centinaia'], h: ['valore', 'nome', 'decine'] }[R.p] || ['valore', 'nome'], r);
     R.valTesto = valoreTesto(R.d, R.p, tipoV);
     R.mazzo = conCifreAvanti(R.mazzo, [R.d], r, 4);
+    assicuraCifre(R, 4, R.p === 'k' ? 1 : 2);   // oltre alla cifra della carta, una non 0 per le migliaia
     const max = R.sec === 'max', pi = POS4.indexOf(R.p);
     R.carta = { tit: `${Art(R.d)}${numHtml(R.d)} deve valere ${numHtml(R.valTesto)}`, sub: `e il numero più ${max ? 'grande' : 'piccolo'} possibile` };
     R.cifraOk = c => c[pi] === R.d;
@@ -888,8 +942,9 @@ function genera(id, r, fase, i = 0) {
   }
   if (id === 'vicino') {
     R.tipo = 'vicino';
-    R.T = numeroDistinto(r);
-    R.forma = ins ? (i === 0 ? 'lettere' : 'disordine') : pick(['lettere', 'khdau', 'disordine', 'cambio', 'additiva', 'lettere', 'cambio'], r);
+    R.T = numeroCostruibile(r);
+    R.forma = ins ? (i === 0 ? 'lettere' : 'disordine') : pick(['lettere', 'khdau', 'disordine', 'cambio', 'cambioDa', 'additiva', 'lettere', 'cambio'], r);
+    R.qp = ins ? (i === 0 ? 'h' : 'da') : pick(['h', 'da'], r);   // poi: «quante centinaia (decine) ci sono in tutto?»
     const F = forma(R.T, R.forma, r); R.formaHtml = F.html; R.formaBreve = F.breve;
     if (ins) R.mazzo = conCifreAvanti(R.mazzo, cifreDi(R.T), r, 5);
     R.carta = { tit: `Il più vicino a ${F.html}`, sub: 'costruisci il numero più vicino che puoi' };
@@ -898,17 +953,26 @@ function genera(id, r, fase, i = 0) {
     R.istr = `Costruisci il numero più vicino a quello della carta. Poi premi <b>LEGGI</b>.`;
   }
   if (id === 'confronto') {
-    R.tipo = ins ? (i === 0 ? 'minore' : 'vicinoX') : pick(['minore', 'maggiore', 'vicinoX'], r);
-    R.X = R.tipo === 'minore' ? intra(3000, 9800, r) : R.tipo === 'maggiore' ? intra(1100, 7500, r) : numeroDistinto(r);
+    // 'mille' = a cavallo del mille, come nel Wordwall (998, 1001, 853): un numero di 4 cifre contro
+    // uno di 3 («il più piccolo, ma maggiore di 987»), oppure la tabella di 3 cifre (h da u)
+    let t = ins ? (i === 0 ? 'minore' : 'mille') : pick(['minore', 'maggiore', 'vicinoX', 'mille', 'mille'], r);
+    if (t === 'mille') {
+      R.mille = true;
+      const v = ins ? 'su' : pick(['su', 'giu', 'tre'], r);
+      if (v === 'su') { t = 'maggiore'; R.X = intra(880, 999, r); }
+      else { t = 'minore'; R.righe = [POS3]; R.X = v === 'giu' ? intra(1000, 1099, r) : intra(420, 980, r); assicuraCifre(R, 3, 1); }
+    }
+    R.tipo = t;
+    if (R.X == null) R.X = t === 'minore' ? intra(3000, 9800, r) : t === 'maggiore' ? intra(1100, 7500, r) : numeroCostruibile(r);
     if (R.tipo === 'vicinoX' && ins) R.mazzo = conCifreAvanti(R.mazzo, cifreDi(R.X), r, 5);
-    if (R.tipo === 'minore' && ins) {   // INSIEME: il limite deve stare tra il più piccolo e il più grande che si possono fare con le carte scoperte
+    if (R.tipo === 'minore' && ins && !R.mille) {   // INSIEME: il limite deve stare tra il più piccolo e il più grande che si possono fare con le carte scoperte
       const mano = R.mazzo.slice(0, 5), su = [...mano].sort((a, b) => a - b), k0 = su.find(d => d > 0);
-      const minimo = numDa([k0, ...su.filter(d => d !== k0).slice(0, 3)]), massimo = numDa([...mano].sort((a, b) => b - a).slice(0, 4));
+      const minimo = numDa([k0, ...su.filter((d, j) => j !== su.indexOf(k0)).slice(0, 3)]), massimo = numDa([...mano].sort((a, b) => b - a).slice(0, 4));
       if (minimo + 150 < massimo - 50) R.X = intra(minimo + 150, massimo - 50, r);
     }
-    const X = R.X;
+    const X = R.X, tre = R.righe[0].length === 3 ? ' di tre cifre' : '';
     R.carta = {
-      tit: R.tipo === 'minore' ? `Il più grande, ma minore di ${numHtml(X)}` : R.tipo === 'maggiore' ? `Il più piccolo, ma maggiore di ${numHtml(X)}` : `Il più vicino a ${numHtml(X)}`,
+      tit: R.tipo === 'minore' ? `Il più grande${tre}, ma minore di ${numHtml(X)}` : R.tipo === 'maggiore' ? `Il più piccolo, ma maggiore di ${numHtml(X)}` : `Il più vicino a ${numHtml(X)}`,
       sub: 'poi scrivi il segno: &lt; &gt; oppure =' };
     R.score = (n, c) => {
       if (!valide(R, c)) return NONVALE;
@@ -918,7 +982,7 @@ function genera(id, r, fase, i = 0) {
       return -Math.abs(v - X);
     };
     R.obiettivo = (n, c, M) => valide(R, c) && (R.tipo === 'minore' ? N(n) < X : R.tipo === 'maggiore' ? N(n) > X : M.best.some(b => b[0] === c[0]));
-    R.istr = R.tipo === 'vicinoX' ? `Costruisci il numero più vicino a ${X}. Poi premi <b>LEGGI</b>.` : `Costruisci il più ${R.tipo === 'minore' ? 'grande' : 'piccolo'}, ma ${R.tipo === 'minore' ? 'minore' : 'maggiore'} di ${X}. Poi premi <b>LEGGI</b>.`;
+    R.istr = R.tipo === 'vicinoX' ? `Costruisci il numero più vicino a ${X}. Poi premi <b>LEGGI</b>.` : `Costruisci il più ${R.tipo === 'minore' ? 'grande' : 'piccolo'}${tre}, ma ${R.tipo === 'minore' ? 'minore' : 'maggiore'} di ${X}. Poi premi <b>LEGGI</b>.`;
   }
   if (id === 'operazioni') {
     R.op = ins ? (i === 0 ? '+' : '-') : pick(['+', '-'], r);
@@ -931,6 +995,29 @@ function genera(id, r, fase, i = 0) {
     R.score = (n, c) => !valide(R, c) ? NONVALE : add ? -Math.abs(n[0] + n[1] - 1000) : n[0] > n[1] ? -(n[0] - n[1]) : -100000 - (n[1] - n[0]);
     R.obiettivo = (n, c) => valide(R, c) && (add ? Math.abs(n[0] + n[1] - 1000) <= 100 : n[0] > n[1]);
     R.istr = add ? 'Fai due addendi: la somma deve arrivare più vicino possibile a 1000. Poi premi <b>LEGGI</b>.' : 'Fai il minuendo e il sottraendo: la differenza deve essere la più piccola. Poi premi <b>LEGGI</b>.';
+  }
+  if (id === 'moltiplicazione') {   // h da u × u: dove va la carta più grande? (876 × 9 = 7884 batte 976 × 8 = 7808)
+    R.op = '×'; R.tipo = 'mul'; R.righe = [POS3, ['u']];
+    assicuraCifre(R, 4, 2);   // due fattori: servono almeno due cifre non 0
+    R.nomi = ['1° fattore', '2° fattore', 'prodotto'];
+    R.sec = ins ? (i === 0 ? 'max' : 'vicino') : pick(['max', 'vicino'], r);
+    if (R.sec === 'vicino') {
+      if (ins) {   // INSIEME: un traguardo raggiungibile con le carte scoperte (a meno di 250)
+        const prodotti = [];
+        disposizioni(R.mazzo.slice(0, 5), 4, c => { if (c[0] && c[3]) { const p = numDa(c.slice(0, 3)) * c[3]; if (p >= 1300 && p <= 6200) prodotti.push(p); } });
+        if (prodotti.length) R.X = clamp(Math.round(pick(prodotti, r) / 500) * 500, 1500, 6000); else R.sec = 'max';
+      } else R.X = pick([1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 6000], r);
+    }
+    const max = R.sec === 'max', P = n => n[0] * n[1];
+    const sub = 'un numero di tre cifre per una cifra; poi il calcolo in colonna';
+    R.carta = max ? { tit: 'Moltiplicazione: il prodotto più grande', sub } : { tit: `Moltiplicazione: il prodotto più vicino a ${numHtml(R.X)}`, sub };
+    R.score = (n, c) => !valide(R, c) ? NONVALE : max ? P(n) : -Math.abs(P(n) - R.X);
+    R.obiettivo = (n, c, M) => valide(R, c) && (max ? P(n) >= 0.9 * M.max : Math.abs(P(n) - R.X) <= 250);
+    R.istr = max ? 'Fai i due fattori: il prodotto deve essere il più grande possibile. Poi premi <b>LEGGI</b>.' : `Fai i due fattori: il prodotto deve arrivare più vicino possibile a ${R.X}. Poi premi <b>LEGGI</b>.`;
+  }
+  if (R.op) {   // dopo il calcolo: «come si chiama questo numero?» (insieme: sempre il risultato)
+    R.chiedi = ins ? 2 : pick([0, 1, 2, 2], r);
+    R.opzioni = shuffle(TERMINI_RUOLO[R.chiedi], r);
   }
   R.S = R.righe.reduce((a, rg) => a + rg.length, 0);
   R.slots = []; R.righe.forEach((rg, ri) => rg.forEach(pos => R.slots.push({ riga: ri, pos, v: null })));
@@ -966,7 +1053,9 @@ function valuta(R) {
 }
 const puntiNumero = E => E.migliore ? PUNTI.migliore : E.obiettivo ? PUNTI.obiettivo : E.valido ? PUNTI.valido : 0;
 
-/* ---------- il calcolo in colonna (tappa 5): passi dalle unità, riporto e prestito ---------- */
+/* ---------- il calcolo in colonna (tappe 5 e 6): passi dalle unità, riporto e prestito ----------
+   «esce» è il riporto che la colonna passa alla successiva: 0/1 nell'addizione, fino a 8 nella
+   moltiplicazione (9 × 9 + 8 = 89). Il passo «soloRiporto» scrive il riporto finale nelle migliaia. */
 function preparaCalcolo(A, B, op) {
   const tre = n => String(n).padStart(3, '0').split('').map(Number).reverse();   // [u, da, h], anche con lo 0 davanti
   const a = tre(A), b = tre(B), passi = [];
@@ -975,12 +1064,16 @@ function preparaCalcolo(A, B, op) {
     let rip = 0;
     for (let i = 0; i < 3; i++) { const s = a[i] + b[i] + rip; passi.push({ pos: posDi[i], a: a[i], b: b[i], rip, s, cifra: s % 10, esce: s > 9 ? 1 : 0 }); rip = s > 9 ? 1 : 0; }
     if (rip) passi.push({ pos: 'k', a: 0, b: 0, rip: 1, s: 1, cifra: 1, esce: 0, soloRiporto: true });
+  } else if (op === '×') {   // B è una cifra sola: moltiplica ogni cifra di A e aggiungi il riporto
+    let rip = 0;
+    for (let i = 0; i < 3; i++) { const s = a[i] * B + rip; passi.push({ pos: posDi[i], a: a[i], m: B, rip, s, cifra: s % 10, esce: Math.floor(s / 10) }); rip = Math.floor(s / 10); }
+    if (rip) passi.push({ pos: 'k', a: 0, m: B, rip, s: rip, cifra: rip, esce: 0, soloRiporto: true });
   } else {
     let pre = 0;
     for (let i = 0; i < 3; i++) { const ae = a[i] - pre, presta = ae < b[i]; passi.push({ pos: posDi[i], a: a[i], ae, b: b[i], presta, x: presta ? ae + 10 : ae, cifra: (presta ? ae + 10 : ae) - b[i] }); pre = presta ? 1 : 0; }
     // si calcolano tutte le colonne (anche il prestito a catena); gli zeri davanti restano, attenuati
   }
-  return { op, A, B, R: op === '+' ? A + B : A - B, passi, i: 0, scritte: [], err: {}, errTot: 0 };
+  return { op, A, B, R: opera(A, B, op), passi, i: 0, scritte: [], err: {}, errTot: 0 };
 }
 
 /* =====================================================================
@@ -1251,6 +1344,12 @@ const PAROLA = { '<': 'minore di', '>': 'maggiore di', '=': 'uguale a' };
 const esc = s => s === '<' ? '&lt;' : s === '>' ? '&gt;' : s;
 const numeroCostruito = R => numeriDa(R, R.slots.map(s => s.v));
 const pieno = R => R.slots.every(s => s.v != null);
+const PAROLE_N = { 1: 'una', 2: 'due', 3: 'tre', 4: 'quattro' };
+const delle = p => p === 'u' ? 'delle unità' : 'delle ' + NOMEP[p];
+const NOME_OP = { '+': "l'addizione", '-': 'la sottrazione', '×': 'la moltiplicazione' };
+const DI_OP = { '+': "dell'addizione", '-': 'della sottrazione', '×': 'della moltiplicazione' };
+/* i tasti dei posti della tabella del round: K H D U, oppure H D U */
+const tastiPos = R => POS4.filter(p => R.righe.some(rg => rg.includes(p))).map(p => TASTOP[p]);
 /* aspetta che il gioco non sia in pausa (i passi automatici non partono sotto la scheda della pausa) */
 function quandoGioco(R, fn) { const t = () => { if (G.R !== R) return; if (G.stato === 'gioco') fn(); else setTimeout(t, 250); }; t(); }
 
@@ -1259,21 +1358,29 @@ const RIGUARDA = {
   sinistra: 'Una carta grande in un posto a destra, dove vale meno',
   sinistraMin: 'Una carta grande in un posto a sinistra, dove vale di più',
   zero: 'Lo 0 nelle migliaia: il numero ha solo tre cifre',
+  zeroDavanti: 'Un numero che comincia con lo 0 (o il secondo fattore 0)',
   posto: 'La cifra della carta obiettivo non era nel posto giusto',
   vicino: 'Le migliaia non erano le più vicine al numero della carta',
+  quanti: 'Quante centinaia o decine ci sono in tutto in un numero',
   limite: 'Il numero non rispettava il limite della carta (maggiore o minore)',
   segno: 'Il segno: minore e maggiore scambiati',
   riporto: "Il riporto nell'addizione",
   prestito: 'Il prestito nella sottrazione',
   calcolo: 'Un calcolo in colonna',
+  tabelline: 'Una tabellina nella moltiplicazione in colonna',
+  riportoMolt: 'Il riporto nella moltiplicazione',
   minuendo: 'Il minuendo più piccolo del sottraendo',
   somma: 'La somma non era la più vicina a 1000',
   differenza: 'La differenza non era la più piccola',
+  fattore: 'Il secondo fattore: quale carta conviene lì',
+  prodotto: 'Il prodotto non era il migliore possibile',
+  termine: 'I nomi dei termini: addendo, minuendo, fattore, somma, differenza, prodotto',
   prova: "L'operazione della prova",
 };
 function segnaConf(k) { if (!k) return; G.conf[k] = (G.conf[k] || 0) + 1; SESSIONE.conf[k] = (SESSIONE.conf[k] || 0) + 1; }
 function categoria(R, E) {
-  if (!E.valido) return 'zero';
+  if (!E.valido) return R.righe.length > 1 || R.righe[0].length < 4 ? 'zeroDavanti' : 'zero';
+  if (R.tipo === 'mul') return E.cifre[3] !== E.best[3] ? 'fattore' : 'prodotto';
   switch (R.tipo) {
     case 'max': return 'sinistra';
     case 'min': return 'sinistraMin';
@@ -1341,14 +1448,25 @@ const PM = {
   valore: pmRiga('valore', '4', 'Il posto dà il valore', 'Il 4 nelle centinaia vale 400: 4 centinaia, cioè 40 decine.', '4 h = 400 = 40 da'),
   forme: pmRiga('forme', '=', 'Lo stesso numero in tanti modi', '', '3 k 6 h 0 da 5 u = 3605<br>36 h e 5 u = 3605<br>3000 + 600 + 5 = 3605'),
   vicino: pmRiga('vicino', ICO.bersaglio, 'Il più vicino', 'Si parte dalle migliaia: prima le migliaia più vicine, poi le centinaia.', ''),
+  quanti: pmRiga('quanti', '|', 'Quante in tutto?', 'Copri le colonne a destra: il numero che resta.', '36|05 → 36 centinaia · 360|5 → 360 decine<br>1000 = 10 h = 100 da = 1000 u'),
   confronto: pmRiga('confronto', '&gt;', 'Maggiore, minore, uguale', 'Si confronta da sinistra: prima le migliaia; se sono uguali, le centinaia, e così via.', '4044 &gt; 3999 · 2070 &lt; 2700'),
+  cifre: pmRiga('cifre', '4', 'Prima conta le cifre', 'Un numero di 4 cifre è sempre maggiore di uno di 3 cifre.', '1001 &gt; 999 · 987 &lt; 1000'),
   segno: pmRiga('segno', '&lt;', 'Il segno', 'La parte aperta del segno guarda il numero più grande.', '5 &gt; 3 · 3 &lt; 5 · 4 = 4'),
   addizione: pmRiga('addizione', '+', 'Addizione', 'addendo + addendo = somma. Se una colonna fa più di 9, scrivi le unità e porti 1 alla colonna dopo.', 'La prova è una sottrazione.'),
   sottrazione: pmRiga('sottrazione', '−', 'Sottrazione', "minuendo − sottraendo = differenza. Se in alto c'è meno, chiedi in prestito 1 alla colonna dopo.", "La prova è un'addizione."),
+  moltiplicazione: pmRiga('moltiplicazione', '×', 'Moltiplicazione', 'fattore × fattore = prodotto. Dalle unità: moltiplica ogni cifra e aggiungi il riporto.', '23 × 4: 3 × 4 = 12, scrivo 2 e porto 1'),
+  stima: pmRiga('stima', ICO.bersaglio, 'Il prodotto più vicino', 'Guarda le centinaia del primo fattore.', '6 h × 5 = 30 h = 3000'),
+  termini: pmRiga('termini', '=', 'I nomi dei termini', '', 'addendo + addendo = somma<br>minuendo − sottraendo = differenza<br>fattore × fattore = prodotto'),
+  terminiX: pmRiga('termini', '=', 'I nomi dei termini', '', 'fattore × fattore = prodotto<br>addendo + addendo = somma<br>minuendo − sottraendo = differenza'),   // tappa 6: la moltiplicazione per prima
 };
-const PM_TAPPA = { grande: ['tabella', 'sinistra', 'zero'], valore: ['tabella', 'valore', 'zero'], vicino: ['tabella', 'forme', 'vicino'], confronto: ['confronto', 'segno', 'zero'], operazioni: ['addizione', 'sottrazione'] };
+const PM_TAPPA = { grande: ['tabella', 'sinistra', 'zero'], valore: ['tabella', 'valore', 'zero'], vicino: ['tabella', 'forme', 'vicino', 'quanti'], confronto: ['confronto', 'cifre', 'segno', 'zero'], operazioni: ['addizione', 'sottrazione', 'termini'], moltiplicazione: ['moltiplicazione', 'stima', 'terminiX'] };
 const PM_AIUTO = { max: 'sinistra', min: 'sinistra', cifra: 'valore', vicino: 'vicino', vicinoX: 'confronto', minore: 'confronto', maggiore: 'confronto', add: 'addizione', sub: 'sottrazione' };
+const pmAiuto = R => R.tipo === 'mul' ? (R.sec === 'max' ? 'moltiplicazione' : 'stima') : R.mille ? 'cifre' : PM_AIUTO[R.tipo];
+const regola = R => R.tipo === 'mul' ? (R.sec === 'max' ? REGOLA.mulMax : REGOLA.mulVicino) : R.mille ? REGOLA.mille : REGOLA[R.tipo];
 const REGOLA = {
+  mille: 'Ricorda: prima conta le cifre (4 cifre battono 3 cifre), poi confronta da sinistra.',
+  mulMax: 'Ricorda: il secondo fattore moltiplica ogni cifra del primo.',
+  mulVicino: 'Ricorda: guarda le centinaia, 6 h × 5 = 30 h = 3000.',
   max: 'Ricorda: a sinistra una cifra vale di più.',
   min: 'Ricorda: a sinistra una cifra vale di più, ma nelle migliaia non va lo 0.',
   cifra: 'Ricorda: il posto dà il valore.',
@@ -1371,11 +1489,12 @@ function pulsaPromemoria(k) {
 function comandiHtml() {
   const R = G.R; if (!R) return '';
   const ops = R.righe.length > 1;
-  const pos = (ops ? ['H', 'D', 'U'] : ['K', 'H', 'D', 'U']).map(t => `<span class="cap">${t}</span>`).join(' ');
+  const pos = tastiPos(R).map(t => `<span class="cap">${t}</span>`).join(' ');
   let h = '<div class="pan-tit">Come si gioca</div>';
   if (R.fase === 'insieme') h += `<span class="cap">${ICO.mano}</span><span>tocca una carta, poi la casella</span><span class="cap">← →</span><span>scegli la carta</span><span>${pos}</span><span>mettila in quel posto</span><span class="cap">${ICO.cancella}</span><span>riprendi l'ultima</span><span class="cap">INVIO</span><span>LEGGI</span>`;
   else h += `<span class="cap">${ICO.mano}</span><span>tocca la casella per la carta girata</span><span>${pos}</span><span>mettila in quel posto</span><span class="cap">C</span><span>cestino: uno solo</span><span class="cap">spazio</span><span>lente: quanto vale lì</span>`;
-  if (ops) h += `<span class="cap">↑ ↓</span><span>cambia riga</span><span class="cap">0-9</span><span>scrivi il risultato</span>`;
+  if (ops) h += `<span class="cap">↑ ↓</span><span>cambia riga</span><span class="cap">0-9</span><span>scrivi il risultato</span><span class="cap">1 2 3</span><span>scegli il nome</span>`;
+  if (R.id === 'vicino') h += `<span class="cap">0-9</span><span>quante in tutto</span><span class="cap">INVIO</span><span>controlla</span>`;
   if (R.id === 'confronto') h += `<span class="cap">&lt; &gt; =</span><span>scrivi il segno</span>`;
   return h;
 }
@@ -1453,7 +1572,7 @@ function disegna() {
   aggiornaStriscia(); aggiornaBanco();
 }
 function mazzoHtml(R) {
-  const resto = 10 - R.girate, v = R.corrente;
+  const resto = R.mazzo.length - R.girate, v = R.corrente;
   return `<div class="mazzo-zona"><div class="mazzo ${resto ? '' : 'vuoto'}">${'<div class="cc dorso"></div>'.repeat(clamp(resto, 1, 3))}<span class="mazzo-n">${resto}</span></div><div class="girata"><small>la carta</small>${v != null ? `<div class="cc ${R.anim.gira ? 'gira' : ''}" data-v="${v}">${v}</div>` : '<div class="vuota"></div>'}</div></div>`;
 }
 function manoHtml(R) { return `<div class="mano">${R.mano.map((c, i) => `<div class="cc ${c.usata ? 'usata' : ''} ${i === R.sel && !c.usata ? 'sel' : ''}" data-v="${c.v}" data-m="${i}">${c.v}</div>`).join('')}</div>`; }
@@ -1470,8 +1589,9 @@ function slotHtml(R, i) {
   dentro += prestitoHtml(R, i);
   return `<div class="${cls.join(' ')}" data-s="${i}">${dentro}</div>`;
 }
-function tabellaHtml(R) { return `<div class="griglia" style="grid-template-columns:repeat(4,auto)">${POS4.map(p => phHtml(p)).join('')}${R.slots.map((_, i) => slotHtml(R, i)).join('')}</div>`; }
-/* tappa 5: le due righe di carte diventano l'operazione in colonna (k h da u), con riporti e prestiti */
+function tabellaHtml(R) { const P = R.righe[0]; return `<div class="griglia" style="grid-template-columns:repeat(${P.length},auto)">${P.map(p => phHtml(p)).join('')}${R.slots.map((_, i) => slotHtml(R, i)).join('')}</div>`; }
+/* tappe 5 e 6: le due righe di carte diventano l'operazione in colonna (k h da u), con riporti e prestiti;
+   nella moltiplicazione la seconda riga ha solo le unità (h da u × u) */
 const COL = ['u', 'da', 'h', 'k'];
 function prestitoHtml(R, i) {
   const C = R.calc, s = R.slots[i]; if (!C || R.op !== '-' || s.riga !== 0) return '';
@@ -1482,17 +1602,20 @@ function prestitoHtml(R, i) {
   return h;
 }
 function colonnaHtml(R) {
-  const C = R.calc, conti = !!C && ['calcolo', 'prova', 'esito'].includes(R.stato);
+  const C = R.calc, conti = !!C && ['calcolo', 'termine', 'prova', 'esito'].includes(R.stato);
   const vuoto = '<div></div>';
+  // durante «come si chiama?» i nomi delle righe spariscono: al loro posto il punto di domanda
+  const nome = ri => R.stato === 'termine' ? (ri === R.termine.riga ? '<span class="r-chiedi">?</span>' : '') : R.nomi[ri];
   let h = `<div class="griglia" style="grid-template-columns:auto auto repeat(4,auto)">${vuoto}${vuoto}${phHtml('k', false)}${POS4.slice(1).map(p => phHtml(p, R.stato === 'costruisci')).join('')}`;
-  if (conti && C.op === '+') h += vuoto + vuoto + POS4.map(p => { const j = COL.indexOf(p), prima = C.passi[j - 1]; return `<div class="rip">${prima && C.i > j - 1 && prima.esce ? '1' : ''}</div>`; }).join('');
+  // i riporti sopra la prima riga: 1 nell'addizione, fino a 8 nella moltiplicazione
+  if (conti && C.op !== '-') h += vuoto + vuoto + POS4.map(p => { const j = COL.indexOf(p), prima = C.passi[j - 1]; return `<div class="rip">${prima && C.i > j - 1 && prima.esce ? prima.esce : ''}</div>`; }).join('');
   R.righe.forEach((rg, ri) => {
-    h += `<div class="r-lab">${R.nomi[ri]}</div><div class="r-op">${ri === 1 ? (R.op === '+' ? '+' : '−') : ''}</div>${vuoto}`;
-    R.slots.forEach((s, i) => { if (s.riga === ri) h += slotHtml(R, i); });
+    h += `<div class="r-lab">${nome(ri)}</div><div class="r-op">${ri === 1 ? SIMB[R.op] : ''}</div>`;
+    POS4.forEach(p => { const i = R.slots.findIndex(s => s.riga === ri && s.pos === p); h += i >= 0 ? slotHtml(R, i) : vuoto; });
   });
   if (conti) {
     h += `${vuoto}<div class="linea-op" style="grid-column:2/7;width:100%"></div>`;
-    h += `<div class="r-lab">${R.nomi[2]}</div><div class="r-op">=</div>`;
+    h += `<div class="r-lab">${nome(2)}</div><div class="r-op">=</div>`;
     h += POS4.map(p => {
       const j = COL.indexOf(p), st = C.passi[j];
       if (!st) return vuoto;
@@ -1508,11 +1631,29 @@ function cestinoHtml(R) {
   const v = R.cestino;
   return `<div class="cestino"><div class="ph">${ICO.cestino}<small>cestino</small><span class="cap">C</span></div><div class="slot ${v != null ? 'pieno' : ''}" data-s="c">${v != null ? `<div class="cc ${R.anim.posa === 'c' ? 'posa' : ''}" data-v="${v}">${v}</div>` : ''}</div></div>`;
 }
+/* le cifre di due numeri allineate a destra: 987 sotto 1001 ha la casella delle migliaia vuota */
+function colonneDi(N, X) {
+  const L = Math.max(String(N).length, String(X).length), pad = n => { const c = cifreDi(n); return [...Array(L - c.length).fill(null), ...c]; };
+  const a = pad(N), b = pad(X);
+  return { a, b, pos: POS4.slice(4 - L), d: a.findIndex((v, i) => v !== b[i]) };
+}
 function confrontoColonne(N, X, etq2) {
-  const a = cifreDi(N), b = cifreDi(X), d = a.findIndex((v, i) => v !== b[i]);
-  const riga = c => c.map((v, i) => `<i class="p-${POS4[i]} ${i === d ? 'diff' : (d < 0 || i < d) ? 'ugu' : ''}">${v}</i>`).join('');
+  const { a, b, pos, d } = colonneDi(N, X);
+  const riga = c => c.map((v, i) => v == null ? `<i class="vuota p-${pos[i]}"></i>` : `<i class="p-${pos[i]} ${i === d ? 'diff' : (d < 0 || i < d) ? 'ugu' : ''}">${v}</i>`).join('');
   return `<div class="confronta"><div class="etq">il tuo<br>numero</div><div class="mini">${riga(a)}</div><div class="etq">${etq2}</div><div class="mini">${riga(b)}</div></div>`;
 }
+/* tappa 3: «copri le colonne a destra» — quello che resta sono le centinaia (decine) in tutto */
+function copriHtml(Q) {
+  const c = cifreDi(Q.N), n = Q.p === 'h' ? 2 : 1;
+  return `<div class="copri"><div class="mini">${c.map((d, i) => `<i class="p-${POS4[i]} ${i >= c.length - n ? 'coperta' : 'resta'}">${d}</i>`).join('')}</div><small>copri ${Q.p === 'h' ? 'decine e unità' : 'le unità'}</small></div>`;
+}
+const spiegaQuanti = (N, p) => {
+  const c = cifreDi(N);
+  if (p === 'h') return `${c[0]} ${c[0] === 1 ? 'migliaio' : 'migliaia'} = ${c[0] * 10} centinaia, più ${c[1]}`;
+  const h = Math.floor(N / 100); return `${h} centinaia = ${h * 10} decine, più ${c[2]}`;
+};
+const QUALE_RIGA = ['il primo numero', 'il secondo numero', 'il risultato'];
+const formula = op => `${TERMINI[op][0]} ${SIMB[op]} ${TERMINI[op][1]} = ${TERMINI[op][2]}`;
 function esitoHtml(R) {
   if (R.stato === 'segno') {
     const S = R.segno, N = numeroCostruito(R)[0];
@@ -1520,7 +1661,18 @@ function esitoHtml(R) {
       <div class="segni-btn">${['<', '=', '>'].map(s => `<button class="sbtn" data-segno="${esc(s)}" tabindex="-1">${esc(s)}<small>${PAROLA[s]}</small></button>`).join('')}</div>
       ${S.err ? confrontoColonne(N, R.X, 'il numero<br>della carta') : ''}`;
   }
+  if (R.stato === 'quanti') {
+    const Q = R.quanti;
+    return `<div class="quanti"><div class="q-dom">Quante <b>${NOMEP[Q.p]}</b> ci sono in tutto in <b>${Q.N}</b>?</div>
+      <div class="q-riga"><span class="q-box ${Q.stato}">${Q.scritto}</span><span class="q-nome">${NOMEP[Q.p]}</span>${Q.err >= 2 && !Q.ok ? copriHtml(Q) : ''}</div>
+      <div class="segni-btn q-tasti">${[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map(d => `<button class="sbtn cifra" data-qcifra="${d}" tabindex="-1">${d}</button>`).join('')}<button class="sbtn icona" data-qcanc tabindex="-1">${ICO.cancella}<small>cancella</small></button><button class="sbtn icona invia" data-qok tabindex="-1">${ICO.avanti}<small>controlla · INVIO</small></button></div></div>`;
+  }
   if (R.stato === 'calcolo') return `<div class="segni-btn">${[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map(d => `<button class="sbtn cifra" data-cifra="${d}" tabindex="-1">${d}</button>`).join('')}</div>`;
+  if (R.stato === 'termine') {
+    const T = R.termine;
+    return `<div class="q-dom">Come si chiama <b>${QUALE_RIGA[T.riga]}</b> ${DI_OP[R.op]}?</div>
+      <div class="segni-btn termini">${R.opzioni.map((o, i) => `<button class="sbtn parola ${T.messo === o ? T.stato : ''}" data-termine="${o}" tabindex="-1">${o}<small>${i + 1}</small></button>`).join('')}</div>`;
+  }
   if (R.stato === 'prova') {
     const C = R.calc, P = R.prova;
     return `<div class="segno-riga piccola"><span class="prova-tit">La prova:</span><span>${C.R}</span><span class="segno-box ${P.stato}">${P.messo ? (P.messo === '-' ? '−' : '+') : ''}</span><span>${C.B}</span><span>= ?</span></div>
@@ -1529,25 +1681,33 @@ function esitoHtml(R) {
   if (R.stato !== 'esito' && R.stato !== 'fatto') return '';
   const E = R.E; let h = '';
   if (R.righe.length === 1) {
-    const N = E.nums[0];
-    h += `<div class="lettere ${E.valido ? '' : 'nonvale'}"><small>${E.valido ? 'in lettere' : 'con lo 0 davanti: tre cifre'}</small>${inLettere(N)}</div>`;
+    const N = E.nums[0], P = R.righe[0];
+    h += `<div class="lettere ${E.valido ? '' : 'nonvale'}"><small>${E.valido ? 'in lettere' : `con lo 0 davanti: ${PAROLE_N[P.length - 1]} cifre`}</small>${inLettere(N)}</div>`;
     if (R.tipo === 'vicino') h += `<div class="svela">${R.formaHtml} = <b>${R.T}</b></div>`;
+    if (R.quanti && R.quanti.ok) h += `<div class="prova-riga">${ICO.ok}In ${N}: ${R.quanti.giusto} ${NOMEP[R.quanti.p]} in tutto<small>${spiegaQuanti(N, R.quanti.p)}</small></div>`;
     if (R.segno && R.segno.ok) h += `<div class="prova-riga">${ICO.ok}${N} ${esc(R.segno.giusto)} ${R.X}<small>${N} è ${PAROLA[R.segno.giusto]} ${R.X}</small></div>`;
-    if (!E.migliore && E.valido) h += `<div class="confronta"><div class="etq">il tuo<br>numero</div><div class="mini">${E.cifre.map((d, i) => `<i class="p-${POS4[i]} ${d !== E.best[i] ? 'diff' : ''}">${d}</i>`).join('')}</div><div class="etq">il migliore<br>con queste carte</div><div class="mini">${E.best.map((d, i) => `<i class="p-${POS4[i]} ${d !== E.cifre[i] ? 'diff' : ''}">${d}</i>`).join('')}</div></div>`;
-    else if (!E.valido) h += `<div class="confronta"><div class="etq">il migliore<br>con queste carte</div><div class="mini">${E.best.map((d, i) => `<i class="p-${POS4[i]}">${d}</i>`).join('')}</div></div>`;
+    if (!E.migliore && E.valido) h += `<div class="confronta"><div class="etq">il tuo<br>numero</div><div class="mini">${E.cifre.map((d, i) => `<i class="p-${P[i]} ${d !== E.best[i] ? 'diff' : ''}">${d}</i>`).join('')}</div><div class="etq">il migliore<br>con queste carte</div><div class="mini">${E.best.map((d, i) => `<i class="p-${P[i]} ${d !== E.cifre[i] ? 'diff' : ''}">${d}</i>`).join('')}</div></div>`;
+    else if (!E.valido) h += `<div class="confronta"><div class="etq">il migliore<br>con queste carte</div><div class="mini">${E.best.map((d, i) => `<i class="p-${P[i]}">${d}</i>`).join('')}</div></div>`;
   } else {
-    const C = R.calc, simb = R.op === '+' ? '+' : '−';
+    const C = R.calc, simb = SIMB[R.op];
     if (C) h += `<div class="lettere"><small>${R.nomi[2]}</small>${C.R} · ${inLettere(C.R)}</div>`;
+    if (R.termine && R.termine.ok) h += `<div class="prova-riga">${ICO.ok}${formula(R.op)}</div>`;
     if (R.prova && R.prova.ok) h += `<div class="prova-riga">${ICO.ok}${C.R} ${R.op === '+' ? '−' : '+'} ${C.B} = ${C.A}<small>torna ${R.op === '+' ? 'il primo addendo' : 'il minuendo'}: il calcolo è giusto</small></div>`;
-    if (!E.migliore) { const [a, b] = E.bestNums; h += `<div class="confronta"><div class="etq">con queste carte<br>si poteva fare</div><div class="svela">${a} ${simb} ${b} = <b>${R.op === '+' ? a + b : a - b}</b></div></div>`; }
+    if (!E.migliore) { const [a, b] = E.bestNums; h += `<div class="confronta"><div class="etq">con queste carte<br>si poteva fare</div><div class="svela">${a} ${simb} ${b} = <b>${opera(a, b, R.op)}</b></div></div>`; }
   }
   return `<div class="esito-riga"><div class="esito-col">${h}</div><div class="posto-invio" id="postoInvio"></div></div>`;
 }
 function aggiornaStriscia() {
   const R = G.R, b = $('#striscia'); if (!R) { b.innerHTML = ''; return; }
   if (R.fase === 'insieme') { b.innerHTML = `<span class="st-nota">${R.stato === 'costruisci' ? 'Carte scoperte: spostale finché vuoi, poi premi <b>LEGGI</b>.' : 'Tutte le carte sono sul tavolo.'}</span>`; return; }
-  const uscite = new Set(R.mazzo.slice(0, R.girate));
-  b.innerHTML = `<span class="st-tit">Ancora nel mazzo</span><span class="st-c">${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(d => `<i class="${d === R.corrente ? 'ora' : uscite.has(d) ? 'fuori' : ''}">${d}</i>`).join('')}</span>`;
+  // le carte uguali (i tre 0) si barrano una alla volta: prima quelle già uscite, poi quella girata
+  const uscite = {}, visti = {};
+  R.mazzo.slice(0, R.girate).forEach(d => { uscite[d] = (uscite[d] || 0) + 1; });
+  if (R.corrente != null) uscite[R.corrente]--;
+  b.innerHTML = `<span class="st-tit">Ancora nel mazzo</span><span class="st-c">${MAZZO.map(d => {
+    const j = visti[d] = (visti[d] ?? -1) + 1, prima = uscite[d] || 0;
+    return `<i class="${j < prima ? 'fuori' : d === R.corrente && j === prima ? 'ora' : ''}">${d}</i>`;
+  }).join('')}</span>`;
 }
 function aggiornaBanco() {
   const R = G.R, L = $('#bLeggi'), Le = $('#bLente');
@@ -1575,7 +1735,7 @@ function avviaRound(R, frase, nuova = false, gira = true) {
   if (frase) parla(frase, { nuova });
 }
 function giraCarta() {
-  const R = G.R; if (!R || R.stato !== 'costruisci' || R.girate >= 10) return;
+  const R = G.R; if (!R || R.stato !== 'costruisci' || R.girate >= R.mazzo.length) return;
   R.corrente = R.mazzo[R.girate]; R.girate++; R.anim.gira = true;
   SFX.play('gira'); disegna();
 }
@@ -1602,11 +1762,10 @@ function metti(dest) {
 function aggiornaRigaAttiva(R) {
   if (R.slots.filter(s => s.riga === R.attiva).every(s => s.v != null)) { const altra = R.slots.find(s => s.v == null); if (altra) R.attiva = altra.riga; }
 }
-function slotPerTasto(R, p) {
-  if (R.righe.length === 1) return POS4.indexOf(p);
-  if (p === 'k') return -1;
+function slotPerTasto(R, p) {   // -1 = quel posto non c'è (K con la tabella h da u; H nel secondo fattore)
+  if (R.righe.length === 1) return R.righe[0].indexOf(p);
   const qui = R.slots.findIndex(s => s.riga === R.attiva && s.pos === p);
-  if (R.slots[qui].v == null) return qui;
+  if (qui >= 0 && R.slots[qui].v == null) return qui;
   const altra = R.slots.findIndex(s => s.riga !== R.attiva && s.pos === p && s.v == null);
   return altra >= 0 ? altra : qui;
 }
@@ -1649,8 +1808,16 @@ function lente() {
 function suggerimento(R, E) {
   const d = E.diff, s = R.slots[d], p = s.pos, c = E.cifre[d];
   const qui = maiuscola(nelle(p)) + (R.righe.length > 1 ? ' del ' + R.nomi[s.riga] : '');
-  if (!E.valido) return R.righe.length > 1 ? 'Un numero di 3 cifre non comincia con lo 0: cambia la carta nelle centinaia.' : "Nelle migliaia c'è lo 0: così il numero ha solo tre cifre. Metti lì un'altra carta.";
+  if (!E.valido) {
+    if (R.op === '×' && E.cifre[3] === 0) return 'Il secondo fattore non può essere 0: per 0 il prodotto è sempre 0.';
+    if (R.righe.length > 1) return 'Un numero di 3 cifre non comincia con lo 0: cambia la carta nelle centinaia.';
+    const P = R.righe[0];
+    return `${maiuscola(nelle(P[0]))} c'è lo 0: così il numero ha solo ${PAROLE_N[P.length - 1]} cifre. Metti lì un'altra carta.`;
+  }
   switch (R.tipo) {
+    case 'mul': return s.riga === 1
+      ? `Il secondo fattore moltiplica tutte le cifre del primo: ${R.sec === 'max' ? 'quale carta conviene lì?' : `con un'altra carta lì il prodotto si avvicina di più a ${R.X}.`}`
+      : `Guarda ${le(p)} del primo fattore: con un'altra carta lì il prodotto ${R.sec === 'max' ? 'è più grande' : `si avvicina di più a ${R.X}`}.`;
     case 'max': return `${qui} hai messo ${art(c)}${c}. C'è una carta che lì vale di più?`;
     case 'min': return `${qui} hai messo ${art(c)}${c}. C'è una carta che lì vale di meno?`;
     case 'cifra': return R.cifraOk(E.cifre) ? `${qui} hai messo ${art(c)}${c}. C'è una carta che lì vale di ${R.sec === 'max' ? 'più' : 'meno'}?` : `La carta dice: ${art(R.d)}${R.d} deve valere ${R.valTesto}. In quale colonna vale così?`;
@@ -1672,9 +1839,12 @@ function leggiInsieme() {
   R.err++; G.stat.aiuti++; if (R.err === 1) segnaConf(categoria(R, E));
   const d = E.diff; SFX.play('nonAncora');
   if (R.err === 1) { R.guarda = d; disegna(); parla(suggerimento(R, E), { pulsa: true }); return; }
-  if (R.err === 2) { R.guarda = d; disegna(); pulsaPromemoria(PM_AIUTO[R.tipo]); parla(`${suggerimento(R, E)} ${REGOLA[R.tipo]}`, { pulsa: true }); return; }
-  // terzo tentativo: la guida mette la carta giusta in quella casella, poi rilegge
-  const b = E.best[d], j = R.slots.findIndex((s, k) => k !== d && s.v === b);
+  if (R.err === 2) { R.guarda = d; disegna(); pulsaPromemoria(pmAiuto(R)); parla(`${suggerimento(R, E)} ${regola(R)}`, { pulsa: true }); return; }
+  // terzo tentativo: la guida mette la carta giusta in quella casella, poi rilegge.
+  // Con i tre 0: si prende uno 0 messo nel posto sbagliato, altrimenti quello ancora in mano
+  const b = E.best[d];
+  let j = R.slots.findIndex((s, k) => k !== d && s.v === b && E.best[k] !== b);
+  if (j < 0 && !R.mano.some(x => !x.usata && x.v === b)) j = R.slots.findIndex((s, k) => k !== d && s.v === b);
   if (j >= 0) {
     const tmp = R.slots[d].v; R.slots[d].v = b; R.slots[j].v = tmp;
     R.mano.forEach(c => { if (c.slot === j) c.slot = d; else if (c.slot === d) c.slot = j; });
@@ -1693,7 +1863,49 @@ function dopoCostruzione() {
   const R = G.R; R.lente = false; R.corrente = null;
   if (R.id === 'confronto') return avviaSegno();
   if (R.op) return avviaCalcolo();
+  if (R.id === 'vicino' && R.qp && valide(R, R.slots.map(s => s.v))) return avviaQuanti();
   mostraEsito();
+}
+
+/* ---------- tappa 3: quante centinaia (decine) ci sono IN TUTTO nel numero costruito ----------
+   (Wordwall: «23 h quante unità sono?», «500 quante decine?», «nel mille quante decine?») */
+function avviaQuanti() {
+  const R = G.R, N = numeroCostruito(R)[0];
+  R.stato = 'quanti'; R.quanti = { p: R.qp, N, giusto: quanteInTutto(N, R.qp), scritto: '', err: 0, stato: '', ok: false };
+  disegna(); parla(`Quante ${NOMEP[R.qp]} ci sono in tutto in ${N}? Scrivi il numero e premi <b>INVIO</b>.`);
+}
+const quantiAttivo = R => G.stato === 'gioco' && R && R.stato === 'quanti' && !R.attesa && !R.quanti.ok;
+function scriviQuanti(d) {
+  const R = G.R; if (!quantiAttivo(R)) return;
+  const Q = R.quanti; if (Q.scritto.length >= 4) { scuoti('.q-box'); return; }
+  Q.scritto += d; Q.stato = ''; SFX.play('tick'); disegna();
+}
+function cancellaQuanti() { const R = G.R; if (!quantiAttivo(R)) return; R.quanti.scritto = R.quanti.scritto.slice(0, -1); R.quanti.stato = ''; SFX.play('togli'); disegna(); }
+function controllaQuanti() {
+  const R = G.R; if (!quantiAttivo(R)) return;
+  const Q = R.quanti;
+  if (!Q.scritto) { SFX.play('nonAncora'); scuoti('.q-box'); parla('Scrivi prima il numero con la tastiera.'); return; }
+  const v = +Q.scritto;
+  if (v === Q.giusto) {
+    Q.ok = true; Q.stato = 'ok'; SFX.play('giusto'); disegna();
+    if (G.modo === 'sfida') aggiungiPunti(Q.err ? PUNTI.quantiDopo : PUNTI.quanti, $('.q-box'));
+    R.attesa = true; setTimeout(() => quandoGioco(R, () => { R.attesa = false; mostraEsito(); }), 900);
+    return;
+  }
+  Q.err++; Q.stato = 'no'; if (Q.err === 1) segnaConf('quanti'); SFX.play('nonAncora');
+  const copri = Q.p === 'h' ? 'le decine e le unità' : 'le unità';
+  if (Q.err >= 3) {
+    Q.scritto = String(Q.giusto); Q.ok = true; Q.stato = 'ok'; disegna();
+    parla(`In ${Q.N} ci sono ${Q.giusto} ${NOMEP[Q.p]} in tutto: ${spiegaQuanti(Q.N, Q.p)}.`);
+    R.attesa = true; setTimeout(() => quandoGioco(R, () => { R.attesa = false; mostraEsito(); }), 2800);
+    return;
+  }
+  disegna();
+  const cifra = cifreDi(Q.N)[POS4.indexOf(Q.p)];
+  let msg = v === cifra ? `${v} è la cifra ${delle(Q.p)}. Ma anche ${Q.p === 'h' ? 'ogni migliaio ha 10 centinaia' : 'ogni centinaio ha 10 decine'}: quante sono in tutto?` : `Copri ${copri}: che numero resta?`;
+  if (Q.err === 2) { pulsaPromemoria('quanti'); msg = `Copri ${copri}: il numero che resta sono le ${NOMEP[Q.p]} in tutto.`; }
+  parla(msg, { pulsa: true });
+  setTimeout(() => { if (G.R === R && R.stato === 'quanti' && !Q.ok) { Q.scritto = ''; Q.stato = ''; disegna(); } }, 900);
 }
 
 /* ---------- tappa 4: il segno tra il proprio numero e quello della carta ---------- */
@@ -1720,26 +1932,33 @@ function mettiSegno(s) {
     return;
   }
   disegna();
-  const a = cifreDi(N), b = cifreDi(R.X), d = a.findIndex((v, i) => v !== b[i]);
+  const { a, b, pos, d } = colonneDi(N, R.X), lunghe = a[0] == null || b[0] == null;
   let msg;
   if (d < 0) msg = 'Guarda tutte le colonne: le cifre sono le stesse?';
-  else if (d === 0) msg = `Guarda le migliaia: ${a[0]} e ${b[0]}. Quale numero ne ha di più?`;
-  else { const ug = POS4.slice(0, d).map(p => NOMEP[p]); msg = `${ug.length === 1 ? 'Le ' + ug[0] + ' sono uguali' : maiuscola(ug.slice(0, -1).join(', ')) + ' e ' + ug[ug.length - 1] + ' sono uguali'}. Guarda ${le(POS4[d])}: ${a[d]} e ${b[d]}.`; }
-  if (S.err === 2) { pulsaPromemoria('segno'); msg += ' La parte aperta del segno guarda il numero più grande.'; }
+  else if (lunghe) { const corto = a[0] == null ? N : R.X, lungo = a[0] == null ? R.X : N; msg = `${corto} ha ${PAROLE_N[String(corto).length]} cifre, ${lungo} ne ha ${PAROLE_N[String(lungo).length]}: chi ha più cifre è maggiore.`; }
+  else if (d === 0) msg = `Guarda ${le(pos[0])}: ${a[0]} e ${b[0]}. Quale numero ne ha di più?`;
+  else { const ug = pos.slice(0, d).map(p => NOMEP[p]); msg = `${ug.length === 1 ? 'Le ' + ug[0] + ' sono uguali' : maiuscola(ug.slice(0, -1).join(', ')) + ' e ' + ug[ug.length - 1] + ' sono uguali'}. Guarda ${le(pos[d])}: ${a[d]} e ${b[d]}.`; }
+  if (S.err === 2) { pulsaPromemoria(lunghe ? 'cifre' : 'segno'); msg += ' La parte aperta del segno guarda il numero più grande.'; }
   parla(msg, { pulsa: true });
   setTimeout(() => { if (G.R === R && R.stato === 'segno' && !S.ok) { S.messo = null; S.stato = ''; disegna(); } }, 900);
 }
 
-/* ---------- tappa 5: il calcolo in colonna, cifra per cifra dalle unità, e la prova ---------- */
+/* ---------- tappe 5 e 6: il calcolo in colonna, cifra per cifra dalle unità; il nome dei termini; la prova ---------- */
 function avviaCalcolo() {
   const R = G.R, [A, B] = numeroCostruito(R);
   if (R.op === '-' && A < B) { R.calc = null; mostraEsito(); return; }
   R.calc = preparaCalcolo(A, B, R.op); R.stato = 'calcolo';
   disegna();
-  parla(`Ora ${R.op === '+' ? "l'addizione" : 'la sottrazione'} in colonna. Comincia dalle unità: scrivi la cifra con la tastiera.`);
+  parla(`Ora ${NOME_OP[R.op]} in colonna. Comincia dalle unità: scrivi la cifra con la tastiera.`);
 }
 function aiutoCalcolo(R, st, e) {
   const P = maiuscola(NOMEP[st.pos]);
+  if (R.op === '×') {
+    if (st.soloRiporto) return `Le centinaia hanno dato ${st.rip} di riporto: scrivilo nelle migliaia.`;
+    const conto = `${st.a} × ${st.m}${st.rip ? ` + ${st.rip} di riporto` : ''}`;
+    if (e === 1) return `${P}: quanto fa ${conto}?`;
+    return `${st.a} × ${st.m} = ${st.a * st.m}${st.rip ? `, più ${st.rip} fa ${st.s}` : ''}: ${st.esce ? `scrivi ${st.cifra} e porta ${st.esce} alle ${NOMEP[PROSSIMA[st.pos]]}` : `scrivi ${st.cifra}`}.`;
+  }
   if (R.op === '+') {
     if (st.soloRiporto) return 'Le centinaia hanno dato 1 di riporto: scrivilo nelle migliaia.';
     const conto = `${st.a} + ${st.b}${st.rip ? ' + 1 di riporto' : ''}`;
@@ -1762,7 +1981,7 @@ function scriviCifra(d) {
     return;
   }
   C.err[C.i] = (C.err[C.i] || 0) + 1; C.errTot++;
-  if (C.errTot === 1) segnaConf(R.op === '+' ? (st.rip || st.esce || st.soloRiporto ? 'riporto' : 'calcolo') : (st.presta || st.ae !== st.a ? 'prestito' : 'calcolo'));
+  if (C.errTot === 1) segnaConf(R.op === '+' ? (st.rip || st.esce || st.soloRiporto ? 'riporto' : 'calcolo') : R.op === '×' ? (st.rip || st.soloRiporto ? 'riportoMolt' : 'tabelline') : (st.presta || st.ae !== st.a ? 'prestito' : 'calcolo'));
   SFX.play('nonAncora');
   const e = C.err[C.i];
   if (e >= 3) {
@@ -1779,9 +1998,43 @@ function fineCalcolo() {
   const R = G.R, C = R.calc;
   C.fatto = true; SFX.play('giusto');
   if (G.modo === 'sfida') aggiungiPunti(C.errTot ? PUNTI.calcoloDopo : PUNTI.calcolo, $('.t-tab'));
+  avviaTermine();
+}
+/* come si chiama questo numero? Tre nomi dello stesso ruolo (somma, differenza, prodotto):
+   per scegliere bisogna sapere che cosa fa l'operazione, non basta leggere l'etichetta (nascosta) */
+const DEF_TERMINE = { addendo: "L'addendo è un numero che si aggiunge, nell'addizione", somma: "La somma è il risultato dell'addizione", minuendo: 'Il minuendo è il numero da cui si toglie, nella sottrazione', sottraendo: 'Il sottraendo è il numero che si toglie, nella sottrazione', differenza: 'La differenza è il risultato della sottrazione', fattore: 'Il fattore è un numero che si moltiplica', prodotto: 'Il prodotto è il risultato della moltiplicazione' };
+function avviaTermine() {
+  const R = G.R;
+  R.stato = 'termine'; R.termine = { riga: R.chiedi, giusto: TERMINI[R.op][R.chiedi], messo: null, err: 0, stato: '', ok: false };
+  disegna();
+  parla(`${R.chiedi === 2 ? `Il risultato è ${R.calc.R}. ` : ''}Come si chiama ${QUALE_RIGA[R.chiedi]} ${DI_OP[R.op]}? Scegli il nome: <b>1</b>, <b>2</b> o <b>3</b>.`);
+}
+function scegliTermine(t) {
+  const R = G.R; if (G.stato !== 'gioco' || !R || R.stato !== 'termine' || R.attesa || R.termine.ok || !t) return;
+  const T = R.termine; T.messo = t;
+  if (t === T.giusto) {
+    T.ok = true; T.stato = 'ok'; SFX.play('giusto'); disegna();
+    if (G.modo === 'sfida') aggiungiPunti(T.err ? PUNTI.termineDopo : PUNTI.termine, $('.termini'));
+    R.attesa = true; setTimeout(() => quandoGioco(R, () => { R.attesa = false; dopoTermine(); }), 900);
+    return;
+  }
+  T.err++; T.stato = 'no'; if (T.err === 1) segnaConf('termine'); SFX.play('nonAncora');
+  if (T.err >= 2) {
+    T.messo = T.giusto; T.ok = true; T.stato = 'ok'; disegna(); pulsaPromemoria('termini');
+    parla(`${DEF_TERMINE[t]}. ${{ '+': "Nell'addizione", '-': 'Nella sottrazione', '×': 'Nella moltiplicazione' }[R.op]}: ${formula(R.op)}.`);
+    R.attesa = true; setTimeout(() => quandoGioco(R, () => { R.attesa = false; pulsaPromemoria(null); dopoTermine(); }), 3000);
+    return;
+  }
+  disegna();
+  parla(`${DEF_TERMINE[t]}. Guarda il segno: questa è ${NOME_OP[R.op]}.`, { pulsa: true });
+  setTimeout(() => { if (G.R === R && R.stato === 'termine' && !T.ok) { T.messo = null; T.stato = ''; disegna(); } }, 900);
+}
+function dopoTermine() { const R = G.R; if (R.op === '×') mostraEsito(); else avviaProva(); }   // la prova della moltiplicazione (la divisione) non è di questa unità
+function avviaProva() {
+  const R = G.R;
   R.stato = 'prova'; R.prova = { messo: null, err: 0, stato: '', ok: false };
   disegna();
-  parla(`${maiuscola(R.nomi[2])}: ${C.R}. Ora la prova: quale operazione fai? Premi <b>+</b> oppure <b>−</b>.`);
+  parla('Ora la prova: quale operazione fai? Premi <b>+</b> oppure <b>−</b>.');
 }
 function scegliProva(s) {
   const R = G.R; if (G.stato !== 'gioco' || !R || R.stato !== 'prova' || R.attesa || R.prova.ok) return;
@@ -1808,14 +2061,14 @@ function scegliProva(s) {
 /* ---------- l'esito: il numero in lettere, il migliore possibile con le stesse carte ---------- */
 function messaggioEsito(R, E) {
   if (R.righe.length > 1) {
-    const [A, B] = E.nums, [a, b] = E.bestNums, simb = R.op === '+' ? '+' : '−';
-    if (R.op === '-' && A < B) return `Il minuendo ${A} è più piccolo del sottraendo ${B}: questa sottrazione in terza non si fa. Con queste carte: ${a} − ${b} = <b>${a - b}</b>.`;
-    if (!E.valido) return `Un numero di 3 cifre non comincia con lo 0. Con queste carte si poteva fare ${a} ${simb} ${b} = <b>${R.op === '+' ? a + b : a - b}</b>.`;
-    if (E.migliore) return R.op === '+' ? 'Con queste carte è la somma più vicina a 1000.' : 'Con queste carte è la differenza più piccola.';
-    return `Con queste carte si poteva fare ${a} ${simb} ${b} = <b>${R.op === '+' ? a + b : a - b}</b>.`;
+    const [A, B] = E.nums, [a, b] = E.bestNums, fatto = `${a} ${SIMB[R.op]} ${b} = <b>${opera(a, b, R.op)}</b>`;
+    if (R.op === '-' && A < B) return `Il minuendo ${A} è più piccolo del sottraendo ${B}: questa sottrazione in terza non si fa. Con queste carte: ${fatto}.`;
+    if (!E.valido) return R.op === '×' && E.cifre[3] === 0 ? `Per 0 il prodotto è sempre 0: il secondo fattore non può essere 0. Con queste carte si poteva fare ${fatto}.` : `Un numero di 3 cifre non comincia con lo 0. Con queste carte si poteva fare ${fatto}.`;
+    if (E.migliore) return { '+': 'Con queste carte è la somma più vicina a 1000.', '-': 'Con queste carte è la differenza più piccola.', '×': R.sec === 'max' ? 'Con queste carte è il prodotto più grande.' : `Con queste carte è il prodotto più vicino a ${R.X}.` }[R.op];
+    return `Con queste carte si poteva fare ${fatto}.`;
   }
-  const N = E.nums[0];
-  if (!E.valido) return `Con lo 0 nelle migliaia il numero ha solo tre cifre: è ${inLettere(N)}.`;
+  const N = E.nums[0], P = R.righe[0];
+  if (!E.valido) return `Con lo 0 ${nelle(P[0])} il numero ha solo ${PAROLE_N[P.length - 1]} cifre: è ${inLettere(N)}.`;
   if (R.tipo === 'cifra' && !R.cifraOk(E.cifre)) {
     const q = R.slots.findIndex(s => s.v === R.d);
     return q >= 0 ? `${Art(R.d)}${R.d} è ${nelle(R.slots[q].pos)}: lì vale ${R.d * VAL[R.slots[q].pos]}. La carta chiedeva che valesse ${R.valTesto}: doveva stare ${nelle(R.p)}.`
@@ -1861,12 +2114,12 @@ function prossimoRound() {
   const fase = G.piano[G.iR], prima = G.piano[G.iR - 1];
   const R = genera(G.tappa.id, G.rng, fase, G.iR);
   if (fase === 'insieme') avviaRound(R, R.istr, true);
-  else if (prima === 'insieme') avviaRound(R, `Ora da solo: le carte escono una alla volta. Mettile subito con <b>${R.righe.length > 1 ? 'H D U' : 'K H D U'}</b> oppure con <b>C</b> nel cestino.`, true);
+  else if (prima === 'insieme') avviaRound(R, `Ora da solo: le carte escono una alla volta. Mettile subito con <b>${tastiPos(R).join(' ')}</b> oppure con <b>C</b> nel cestino.`, true);
   else avviaRound(R, istruzioneCarta(R));
 }
 
 /* =====================================================================
-   ALLENAMENTO — il percorso di 6 tappe
+   ALLENAMENTO — il percorso di 7 tappe (griglia 4 + 3)
    ===================================================================== */
 let focusTappa = 1;
 function costruisciPercorso() {
@@ -1917,7 +2170,7 @@ function fineTappa() {
 }
 
 /* =====================================================================
-   SFIDA — a tempo: un numero per livello (tappe 1-5), poi si ricomincia.
+   SFIDA — a tempo: un numero per livello (tappe 1-6), poi si ricomincia.
    Le carte sono le stesse per tutti i Mac nella giornata (seme = data o ?seed=).
    ===================================================================== */
 let focusCasa = 0;
@@ -1962,7 +2215,7 @@ function preparaRoundSfida(primo) {
   G.stato = 'intro';
   avviaRound(R, null, false, false);
   aggiornaClassifica();
-  const o = apriOverlay(`<div class="cov intro"><p class="cov-occh">Livello ${G.livello + 1}${G.giro ? ' · giro ' + (G.giro + 1) : ''}</p><h2>${T0.nome}</h2><p class="cov-sub">${T0.desc}</p>${primo ? '<p class="cov-sub piccolo">Una carta alla volta: mettila subito con un clic oppure con K H D U (C = cestino). Il tempo parte con INVIO.</p>' : ''}</div>`);
+  const o = apriOverlay(`<div class="cov intro"><p class="cov-occh">Livello ${G.livello + 1}${G.giro ? ' · giro ' + (G.giro + 1) : ''}</p><h2>${T0.nome}</h2><p class="cov-sub">${T0.desc}</p>${primo ? `<p class="cov-sub piccolo">Una carta alla volta: mettila subito con un clic oppure con ${tastiPos(R).join(' ')} (C = cestino). Il tempo parte con INVIO.</p>` : ''}</div>`);
   o.classList.add('leggero');
   const via = () => {
     if (G.stato !== 'intro' || G.R !== R) return;
@@ -2160,12 +2413,12 @@ function apriDocente(tab = tabDocente) {
   $('#mTabs').querySelectorAll('button').forEach(b => b.onclick = () => apriDocente(b.dataset.t));
   const B = $('#mBody');
   if (tab === 'metodo') B.innerHTML = `
-    <h4>Obiettivo</h4><p>Il valore posizionale delle cifre nei numeri fino a 9999 (classe terza): comporre e scomporre in k h da u (anche con il cambio, come 36 h = 3600), leggere e scrivere i numeri in lettere, confrontare con &gt; &lt; =, i termini dell'addizione e della sottrazione, il calcolo in colonna con riporto e prestito, la prova.</p>
-    <h4>La meccanica, una sola: il tiro delle cifre</h4><p>Una <b>carta obiettivo</b> dice che numero costruire. Il mazzo ha 10 carte, le cifre da 0 a 9, ognuna una volta sola. Si gira una carta e la si mette <b>subito</b> in una casella della tabella k h da u, oppure nel <b>cestino</b> (un posto solo): non si sposta più. In basso si vedono le carte ancora nel mazzo. A tabella piena la guida legge il numero in lettere e mostra <b>il migliore possibile con le stesse carte uscite</b>: la sfortuna non conta. La decisione è vera: dove metto il 6 se non so che cosa uscirà dopo?</p>
+    <h4>Obiettivo</h4><p>Il valore posizionale delle cifre nei numeri fino a 9999 (classe terza): comporre e scomporre in k h da u (anche con il cambio, come 36 h = 3600 e 360 da = 3600), quante centinaia e decine ci sono in tutto in un numero (nel mille: 10 h, 100 da), leggere e scrivere i numeri in lettere, anche con gli zeri (settemilauno), confrontare con &gt; &lt; = anche a cavallo del mille (999 &lt; 1001), i termini delle operazioni (addendo, minuendo, sottraendo, fattore, somma, differenza, prodotto), il calcolo in colonna con riporto e prestito, la moltiplicazione per una cifra, la prova.</p>
+    <h4>La meccanica, una sola: il tiro delle cifre</h4><p>Una <b>carta obiettivo</b> dice che numero costruire. Il mazzo ha 12 carte: le cifre da 1 a 9 una volta sola, lo 0 tre volte (per i numeri come 7001 e 3600). Si gira una carta e la si mette <b>subito</b> in una casella della tabella k h da u, oppure nel <b>cestino</b> (un posto solo): non si sposta più. In basso si vedono le carte ancora nel mazzo. A tabella piena la guida legge il numero in lettere e mostra <b>il migliore possibile con le stesse carte uscite</b>: la sfortuna non conta. La decisione è vera: dove metto il 6 se non so che cosa uscirà dopo?</p>
     <h4>Metodo</h4><p><b>Dewey</b>: si impara facendo, si costruisce il numero prima di nominarlo. <b>Vygotskij</b>: aiuto che si ritira (insieme, carte scoperte → da solo, una carta alla volta; nell'insieme l'aiuto cresce a ogni tentativo: domanda sulla colonna da guardare, promemoria, la guida mette la carta). Correzione <b>socratica</b>, mai rossa: si indica la colonna, non la soluzione. Chiusura <b>metacognitiva</b> a fine sfida: «come hai deciso dove mettere le cifre?».</p>
-    <h4>Allenamento e sfida</h4><p><b>Allenamento</b> (per tutti, senza punti): 6 tappe, ${CONFIG.NUMERI_INSIEME} numeri insieme e ${CONFIG.NUMERI_SOLO} da solo (3 nella tappa delle operazioni). La regola la spiega la maestra: a destra c'è un promemoria. La guida è l'avatar del maestro e dice solo le istruzioni del fumetto. <b>Sfida</b>: casata contro casata per ${Math.round(IMP.durata / 60)} minuti, un numero per livello. Punti: il migliore possibile ${PUNTI.migliore}, obiettivo raggiunto ${PUNTI.obiettivo}, numero valido ${PUNTI.valido}; segno giusto ${PUNTI.segno}, calcolo senza errori ${PUNTI.calcolo}, prova ${PUNTI.prova}. Il tempo non dà punti. Classifica della giornata <b>a testa</b> (punti ÷ sfide giocate oggi), azzerata a mezzanotte.</p>
+    <h4>Allenamento e sfida</h4><p><b>Allenamento</b> (per tutti, senza punti): ${TAPPE.length} tappe, ${CONFIG.NUMERI_INSIEME} numeri insieme e ${CONFIG.NUMERI_SOLO} da solo (3 nelle tappe delle operazioni). La regola la spiega la maestra: a destra c'è un promemoria. La guida è l'avatar del maestro e dice solo le istruzioni del fumetto. <b>Sfida</b>: casata contro casata per ${Math.round(IMP.durata / 60)} minuti, un numero per livello. Punti: il migliore possibile ${PUNTI.migliore}, obiettivo raggiunto ${PUNTI.obiettivo}, numero valido ${PUNTI.valido}; segno giusto ${PUNTI.segno}, «quante in tutto» ${PUNTI.quanti}, calcolo senza errori ${PUNTI.calcolo}, nome del termine ${PUNTI.termine}, prova ${PUNTI.prova}. Il tempo non dà punti. Classifica della giornata <b>a testa</b> (punti ÷ sfide giocate oggi), azzerata a mezzanotte.</p>
     <h4>Le carte</h4><p>Obiettivi e mazzi sono generati da regole: non si esauriscono. Nella <b>sfida</b> le carte sono le stesse per tutti i Mac nella giornata, quindi le casate giocano alla pari. Con <code>?seed=3A</code> anche l'allenamento ha le stesse carte per tutta la classe e si può correggere insieme alla LIM.</p>
-    <h4>Da Wordwall all'app</h4><p>Gli argomenti vengono da sei attività Wordwall (quiz e abbinamenti sul migliaio, confronto, termini e prove). Lì si sceglie tra risposte già scritte; qui il numero si costruisce, e la cifra vale secondo il posto in cui la si mette.</p>
+    <h4>Da Wordwall all'app</h4><p>Gli argomenti vengono da sei attività Wordwall (72 domande: il migliaio, il confronto, i termini, le prove, il prodotto); la corrispondenza domanda per domanda è nel README. Il numero in lettere l'app lo legge a ogni numero costruito; il bambino lo usa nella direzione lettere → cifre. Lì si sceglie tra risposte già scritte; qui il numero si costruisce, e la cifra vale secondo il posto in cui la si mette.</p>
     <h4>Privacy e iMac condivisi</h4><p>Nessun nome e nessun dato personale. Sul Mac non resta niente: le impostazioni passano dall'indirizzo (scheda «Link per la classe»). La classifica è anonima, per casata. Funziona con la tastiera del Mac, con il mouse alla LIM e con il tocco su iPad.</p>`;
   if (tab === 'link') {
     const f = FORM, url = linkClasse(f);
@@ -2225,7 +2478,7 @@ document.addEventListener('keydown', e => {
   }
   if (G.schermo === 'percorso') {
     if (esc) { tornaHome(); return; }
-    const d = { destra: 1, sinistra: -1, giu: 3, su: -3 }[k];
+    const d = { destra: 1, sinistra: -1, giu: 4, su: -4 }[k];   // 4 tappe per riga
     if (d) { focusTappa = clamp(focusTappa + d, 1, TAPPE.length); aggiornaFocusPercorso(); SFX.play('tick'); }
     else if (invio || spazio) iniziaTappa(focusTappa);
     return;
@@ -2277,7 +2530,9 @@ document.addEventListener('keydown', e => {
     return;
   }
   if (R.stato === 'segno') { if (tasto === '<' || tasto === '>' || tasto === '=') mettiSegno(tasto); return; }
+  if (R.stato === 'quanti') { if (/^[0-9]$/.test(tasto)) scriviQuanti(+tasto); else if (canc) cancellaQuanti(); else if (invio) controllaQuanti(); return; }
   if (R.stato === 'calcolo') { if (/^[0-9]$/.test(tasto)) scriviCifra(+tasto); return; }
+  if (R.stato === 'termine') { if (/^[1-3]$/.test(tasto)) scegliTermine(R.opzioni[+tasto - 1]); return; }
   if (R.stato === 'prova') { if (tasto === '+') scegliProva('+'); else if (tasto === '-' || tasto === '−') scegliProva('-'); return; }
 });
 
@@ -2314,7 +2569,7 @@ async function avvio() {
   $('#bAncora').onclick = () => iniziaSfida(G.casa);
   $('#bCambia').onclick = () => apriCasate();
   ['#parla', '#drisp'].forEach(s => $(s).addEventListener('click', () => ritmoSubito($(s))));
-  // il tavolo: carte della mano, caselle, cestino, segni, cifre del calcolo, prova
+  // il tavolo: carte della mano, caselle, cestino, segni, quante in tutto, cifre del calcolo, nome del termine, prova
   $('#tavolo').addEventListener('click', e => {
     SFX.ctx();
     const R = G.R; if (G.stato !== 'gioco' || !R) return;
@@ -2325,6 +2580,10 @@ async function avvio() {
     const sg = e.target.closest('[data-segno]'); if (sg) { mettiSegno(sg.dataset.segno); return; }
     const cf = e.target.closest('[data-cifra]'); if (cf) { scriviCifra(+cf.dataset.cifra); return; }
     const pv = e.target.closest('[data-prova]'); if (pv) { scegliProva(pv.dataset.prova); return; }
+    const qc = e.target.closest('[data-qcifra]'); if (qc) { scriviQuanti(+qc.dataset.qcifra); return; }
+    if (e.target.closest('[data-qcanc]')) { cancellaQuanti(); return; }
+    if (e.target.closest('[data-qok]')) { controllaQuanti(); return; }
+    const tm = e.target.closest('[data-termine]'); if (tm) { scegliTermine(tm.dataset.termine); return; }
   });
   let tr = 0; addEventListener('resize', () => { clearTimeout(tr); tr = setTimeout(() => { FX.resize(); posizionaInvio(); }, 120); });
   $('#pagina').addEventListener('scroll', () => posizionaInvio(), { passive: true });
