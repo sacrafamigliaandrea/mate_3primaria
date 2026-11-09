@@ -67,13 +67,6 @@ h1,h2,h3,h4{font-weight:inherit}
 .btn-docente{position:fixed;right:1.4vw;bottom:1.6vh;z-index:5;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:12px;color:var(--testo3);font:600 13px/1 var(--fd);opacity:.75;transition:opacity .2s,background .2s,color .2s}
 .btn-docente:hover{opacity:1;background:var(--blu-t);color:var(--blu)}
 .btn-docente svg{width:18px;height:18px}
-.voce-tog{display:inline-flex;align-items:center;gap:.55em;padding:.55em 1em .55em .8em;border-radius:22px;background:#fff;border:1.5px solid var(--filo);color:var(--testo2);font:600 clamp(14px,.95vw,17px)/1 var(--fd);transition:background .2s,color .2s,border-color .2s}
-.voce-tog svg{width:1.35em;height:1.35em}
-.voce-tog b{padding:.25em .55em;border-radius:12px;background:var(--sup2);color:var(--testo3);font:700 .78em/1 var(--f);letter-spacing:.08em;text-transform:uppercase}
-.voce-tog:hover{border-color:var(--blu);color:var(--blu)}
-.voce-tog.on{background:var(--blu);border-color:var(--blu);color:#fff}
-.voce-tog.on b{background:#fff;color:var(--blu)}
-.voce-tog.assente{display:none}
 
 /* testo a ritmo di lettura (fumetti): tutto leggibile subito; la parola di adesso accompagna chi ne ha bisogno */
 .ritmo .w{display:inline-block;padding:0 .07em;transition:transform .22s cubic-bezier(.3,1.4,.5,1),color .2s;transform-origin:50% 75%}
@@ -574,7 +567,6 @@ h1,h2,h3,h4{font-weight:inherit}
   <footer class="piede">
     <span class="gr"><span class="cap">←</span><span class="cap">→</span> scegli</span>
     <span class="gr"><span class="cap">INVIO</span> entra</span>
-    <button class="voce-tog" id="homeVoce" tabindex="-1"></button>
   </footer>
   <button class="btn-docente" id="btnDocente" tabindex="-1"></button>
 </section>
@@ -608,7 +600,6 @@ h1,h2,h3,h4{font-weight:inherit}
     <div class="b-dx">
       <div class="tempo" id="gTempo"><svg viewBox="0 0 36 36"><circle class="bg" cx="18" cy="18" r="14"/><circle class="fg" id="gTempoArco" cx="18" cy="18" r="14" stroke-dasharray="88" stroke-dashoffset="0"/></svg><b id="gTempoN">8:00</b></div>
       <div class="punti" id="gPunti"><b id="gPuntiN">0</b><small>punti</small></div>
-      <button class="ibtn" id="gVoce" tabindex="-1" aria-label="Lettura a voce alta"></button>
       <button class="ibtn" id="gSuono" tabindex="-1" aria-label="Suoni"></button>
       <button class="ibtn" id="gPausa" tabindex="-1" aria-label="Pausa"></button>
       <button class="ibtn" id="gCasa" tabindex="-1" aria-label="Torna all'inizio"></button>
@@ -675,7 +666,7 @@ h1,h2,h3,h4{font-weight:inherit}
    metacognizione finale («come hai deciso dove mettere le cifre?»).
    ===================================================================== */
 const CONFIG = {
-  URL_CLASSIFICA: '',               // Apps Script /exec (classifica-apps-script.gs): vuoto = classifica su ogni Mac
+  URL_CLASSIFICA: 'https://script.google.com/macros/s/AKfycbwIWMgs7H6FGazd49mq4CZkzN4DJ3bgUhZy6N0LRV7MQfaE5deTuI22yI4ZZ_mPwFneWQ/exec',   // Apps Script /exec (classifica-apps-script.gs); vuoto = classifica su ogni Mac
   CHIAVE_DOCENTE: 'sacrafamiglia',  // deve coincidere con quella nell'Apps Script (serve solo per azzerare)
   DURATA_SFIDA: 8 * 60,             // secondi (?durata=10 nell'indirizzo per cambiarla)
   NUMERI_INSIEME: 2,                // allenamento: numeri INSIEME per tappa
@@ -713,7 +704,7 @@ const intra = (a, b, r) => a + Math.floor(r() * (b - a + 1));   // intero tra a 
 const $ = s => document.querySelector(s);
 const QS = new URLSearchParams(location.search);
 // memoria della sola sessione (al posto di localStorage: sugli iMac condivisi non resta niente)
-const MEM = new Map([['mat-voce', QS.get('voce') === '1'], ['mat-suoni', QS.get('suoni') !== '0']]);
+const MEM = new Map([['mat-suoni', QS.get('suoni') !== '0']]);
 const LS = { get(k, d) { return MEM.has(k) ? MEM.get(k) : d; }, set(k, v) { MEM.set(k, v); } };
 function uuid() { try { return crypto.randomUUID(); } catch (e) { return 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 10); } }
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
@@ -752,8 +743,6 @@ const ICO = {
   riprova: S24('<path d="M20 12a8 8 0 1 1-2.4-5.7"/><path d="M20 4v4.5h-4.5"/>'),
   suono: S24('<path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M15.5 9a4 4 0 0 1 0 6M18.2 6.4a7.6 7.6 0 0 1 0 11.2"/>'),
   muto: S24('<path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M16 9.5l5 5M21 9.5l-5 5"/>'),
-  voce: S24('<path d="M5.5 21v-3.4A6.6 6.6 0 0 1 3 12.4 6.6 6.6 0 0 1 15.4 9.4l1.4 3.2-1.4.5v1.9a1.9 1.9 0 0 1-1.9 1.9h-1.3V21"/><path d="M19 8.2a5.6 5.6 0 0 1 0 6.6M21.6 5.6a9.4 9.4 0 0 1 0 11.8"/>'),
-  voceNo: S24('<path d="M5.5 21v-3.4A6.6 6.6 0 0 1 3 12.4 6.6 6.6 0 0 1 15.4 9.4l1.4 3.2-1.4.5v1.9a1.9 1.9 0 0 1-1.9 1.9h-1.3V21"/><path d="M18.4 9.2l4 4M22.4 9.2l-4 4"/>'),
   play: `<svg viewBox="0 0 24 24"><path d="M8 5.2v13.6L19 12z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>`,
   casa: S24('<path d="M3.5 11L12 4l8.5 7"/><path d="M6 9.6V20h12V9.6"/><path d="M10 20v-5h4v5"/>'),
   ok: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#2E7D4F"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
@@ -1171,63 +1160,6 @@ const Classifica = (() => {
 
 
 /* =====================================================================
-   LETTURA A VOCE ALTA — sintesi vocale del Mac (voce italiana), spenta di base
-   (?voce=1 nell'indirizzo, oppure il pulsante). Una voce alla volta, in coda.
-   ===================================================================== */
-const VOCE = (() => {
-  const ok = typeof speechSynthesis !== 'undefined' && typeof SpeechSynthesisUtterance !== 'undefined';
-  const PREF = ['Federica', 'Emma', 'Alice', 'Paola', 'Silvia', 'Luca'];   // voci italiane del Mac, in ordine di preferenza
-  const CPS = 13, RATE = .92;
-  let on = ok && LS.get('mat-voce', false), voce = null, coda = [], ora = null;
-  function scegli() {
-    const it = speechSynthesis.getVoices().filter(v => /^it([-_]|$)/i.test(v.lang));
-    voce = PREF.map(n => it.find(v => v.name.startsWith(n) && v.localService)).find(Boolean) || it.find(v => v.localService) || it[0] || null;
-  }
-  if (ok) { scegli(); speechSynthesis.addEventListener ? speechSynthesis.addEventListener('voiceschanged', scegli) : (speechSynthesis.onvoiceschanged = scegli); }
-  // come si dice: i simboli della matematica con il loro nome; "k h da u" con il nome del posto
-  const PAROLE = { '<': 'minore di', '>': 'maggiore di', '=': 'uguale a', '+': 'più', '−': 'meno', '-': 'meno', 'k': 'migliaia', 'h': 'centinaia', 'da': 'decine', 'u': 'unità' };
-  const pronuncia = w => PAROLE[w] || w;
-  function chiudi(h) {
-    if (h.finito) return;
-    h.finito = true; clearTimeout(h.cane); h._start(); h._end();
-    if (ora === h) { ora = null; setTimeout(prossimo, 60); }
-  }
-  function prossimo() {
-    if (ora || !coda.length) return;
-    const h = ora = coda.shift();
-    const u = new SpeechSynthesisUtterance(h.testo);
-    u.lang = 'it-IT'; if (voce) u.voice = voce; u.rate = RATE;
-    let t0 = performance.now();
-    u.onstart = () => { t0 = performance.now(); h.partito = true; h._start(); };
-    u.onboundary = e => { if (!e.name || e.name === 'word') { h.bordi = true; h.pos0 = e.charIndex; } };
-    u.onend = u.onerror = () => chiudi(h);
-    h.pos = () => { if (h.finito) return Infinity; if (h.bordi) return h.pos0; const e = performance.now() - t0; return !h.partito || e < 900 ? -1 : (e - 700) / 1000 * CPS * RATE; };
-    h.cane = setTimeout(() => { if (ora === h) speechSynthesis.cancel(); chiudi(h); }, 5000 + h.testo.length * 150);
-    h.u = u;
-    try { speechSynthesis.speak(u); } catch (e) { chiudi(h); }
-  }
-  function togli(cond) {
-    coda.filter(h => cond(h.chi)).forEach(h => { coda.splice(coda.indexOf(h), 1); chiudi(h); });
-    if (ora && cond(ora.chi)) { const h = ora; speechSynthesis.cancel(); chiudi(h); }
-  }
-  function di(testo, { chi = null, subito = false } = {}) {
-    const h = { testo, chi, finito: false, partito: false, bordi: false, pos0: 0, pos: () => -1 };
-    h.avvio = new Promise(res => h._start = res); h.fine = new Promise(res => h._end = res);
-    if (!ok || !on || !testo.trim()) { h.finito = true; h._start(); h._end(); h.pos = () => Infinity; return h; }
-    if (subito) togli(() => true); else if (chi) togli(c => c === chi);
-    coda.push(h); prossimo();
-    return h;
-  }
-  return {
-    get ok() { return ok; },
-    get on() { return ok && on; },
-    set on(x) { on = !!x; LS.set('mat-voce', on); if (!on) togli(() => true); },
-    di, togli, zitto: () => togli(() => true), pronuncia,
-  };
-})();
-
-
-/* =====================================================================
    TESTO A RITMO DI LETTURA (fumetti): tutto leggibile subito, la parola di adesso
    in grassetto e ingrandita accompagna chi ne ha bisogno. Niente aspetta il fumetto.
    ===================================================================== */
@@ -1251,7 +1183,6 @@ function ritmo(box, html, alFine) {
   avvolgi(box);
   box.classList.add('ritmo'); box.classList.remove('letto');
   box._fine = alFine || null;
-  if (VOCE.on && box.closest('.parla,.drisp')) return ritmoVoce(box, parole, gen);
   let i = 0;
   const passo = () => {
     if (box._ritmo !== gen) return;
@@ -1263,24 +1194,8 @@ function ritmo(box, html, alFine) {
   };
   passo();
 }
-function ritmoVoce(box, parole, gen) {
-  let testo = '';
-  const off = parole.map(w => { const o = testo.length; testo += VOCE.pronuncia(w.textContent) + ' '; return o; });
-  const h = box._voce = VOCE.di(testo, { chi: box });
-  let i = -1;
-  const passo = () => {
-    if (box._ritmo !== gen) return;
-    const p = h.pos();
-    let k = i; while (k + 1 < parole.length && off[k + 1] <= p) k++;
-    if (k !== i) { parole.forEach((w, j) => { w.classList.toggle('letta', j < k); w.classList.toggle('ora', j === k); }); i = k; }
-    if (h.finito) { parole.forEach(w => { w.classList.remove('ora'); w.classList.add('letta'); }); box.classList.add('letto'); const f = box._fine; box._fine = null; if (f) f(); return; }
-    setTimeout(passo, 40);
-  };
-  passo();
-}
-function ritmoSubito(box) {   // mostra subito tutto (clic sul fumetto); con la voce, la zittisce
+function ritmoSubito(box) {   // mostra subito tutto (clic sul fumetto)
   if (!box._fine && box.classList.contains('letto')) return;
-  if (box._voce && !box._voce.finito) VOCE.togli(c => c === box);
   box._ritmo = (box._ritmo || 0) + 1;
   box.querySelectorAll('.w').forEach(w => { w.classList.remove('ora'); w.classList.add('letta'); });
   box.classList.add('letto');
@@ -1492,7 +1407,7 @@ function aggiornaSx() {
   }).join('');
   $('#sxComandi').innerHTML = comandiHtml();
 }
-/* la barra in alto (blu): chi sei · dove sei · tempo, punti, voce, suoni, pausa, casa */
+/* la barra in alto (blu): chi sei · dove sei · tempo, punti, suoni, pausa, casa */
 function impostaBarra() {
   const tok = $('#gTok');
   if (G.modo === 'sfida') {
@@ -2081,7 +1996,7 @@ setInterval(() => {
 }, 250);
 function tempoScaduto() {
   G.tempo.attivo = false; G.tempo.resta = 0; aggiornaTempo();
-  VOCE.zitto(); bottoneGuida(null);
+  bottoneGuida(null);
   G.stato = 'tempo'; aggiornaBanco();
   SFX.play('fineSfida');
   apriOverlay(`<div class="cov"><p class="cov-occh">Tempo scaduto</p><h2><b class="cov-num">${G.punti}</b> punti</h2><p class="cov-sub">per ${CASE[G.casa].parlato}. Premi INVIO per vedere la classifica.</p></div>`);
@@ -2185,14 +2100,14 @@ const ov = () => $('#ov');
 function apriOverlay(html) { const o = ov(); o.className = 'ov on'; o.innerHTML = html; return o; }
 function nascondiOverlay() { const o = ov(); o.className = 'ov'; o.innerHTML = ''; }
 function pulisci() {
-  G.gen++; VOCE.zitto(); nascondiOverlay(); bottoneGuida(null); mostraInvio(null); pulsaPromemoria(null);
+  G.gen++; nascondiOverlay(); bottoneGuida(null); mostraInvio(null); pulsaPromemoria(null);
   $('#pagina').classList.remove('fatta'); clearTimeout(G.tPosa);
   if (G.tempo) G.tempo.attivo = false;
 }
 let focusPausa = 0;
 function mostraPausa() {
   if (G.schermo !== 'gioco' || ['pausa', 'tempo', 'intro', 'off', 'fine'].includes(G.stato)) return;
-  VOCE.zitto(); G.stato = 'pausa'; focusPausa = 0;
+  G.stato = 'pausa'; focusPausa = 0;
   G.invioPrima = G.invioFn; mostraInvio(null);
   const esci = G.modo === 'allena' ? 'il percorso' : 'esci dalla sfida';
   const o = apriOverlay(`<div class="cov"><h2>Pausa</h2>${G.modo === 'sfida' ? '<p class="cov-sub">Il tempo è fermo.</p>' : ''}<div class="scelte"><button class="bsc oro focus" data-a="0" tabindex="-1">${ICO.play}continua<span class="cap">INVIO</span></button><button class="bsc" data-a="1" tabindex="-1">${esci}</button><button class="bsc" data-a="2" tabindex="-1">${ICO.casa}inizio</button></div></div>`);
@@ -2215,17 +2130,14 @@ function abbandona() {
 }
 function tornaHome() { pulisci(); if (Classifica.partita) Classifica.chiudi(); G.stato = 'off'; G.modo = null; G.R = null; mostraSchermo('home'); aggiornaClassifica(); }
 function mostraSchermo(id) {
-  G.schermo = id; VOCE.zitto(); mostraInvio(null);
+  G.schermo = id; mostraInvio(null);
   ['home', 'percorso', 'casate', 'gioco', 'fine'].forEach(s => $('#' + s).classList.toggle('on', s === id));
 }
 
-/* ---------- Voce e suoni: valgono per questa sessione (o dall'indirizzo: ?voce=1) ---------- */
+/* ---------- Suoni: valgono per questa sessione (o dall'indirizzo: ?suoni=0). Niente voce: solo fumetti e suoni guida ---------- */
 function aggiornaBottoni() {
-  const s = $('#gSuono'); s.innerHTML = SFX.on ? ICO.suono : ICO.muto; s.classList.toggle('off', !SFX.on);
-  const v = $('#gVoce'); v.innerHTML = VOCE.on ? ICO.voce : ICO.voceNo; v.classList.toggle('off', !VOCE.on); v.style.display = VOCE.ok ? '' : 'none'; v.title = `Lettura a voce alta: ${VOCE.on ? 'sì' : 'no'}`;
-  const h = $('#homeVoce'); h.innerHTML = `${VOCE.on ? ICO.voce : ICO.voceNo}lettura a voce alta<b>${VOCE.on ? 'sì' : 'no'}</b>`; h.classList.toggle('on', VOCE.on); h.classList.toggle('assente', !VOCE.ok);
+  const s = $('#gSuono'); s.innerHTML = SFX.on ? ICO.suono : ICO.muto; s.classList.toggle('off', !SFX.on); s.title = `Suoni: ${SFX.on ? 'sì' : 'no'}`;
 }
-function cambiaVoce() { VOCE.on = !VOCE.on; aggiornaBottoni(); if (VOCE.on) VOCE.di('Leggo io, ad alta voce.', { chi: 'prova' }); }
 
 /* ---------- Pannello docente: metodo, link per la classe, classifica, sessione ---------- */
 let tabDocente = 'metodo';
@@ -2235,12 +2147,12 @@ function linkClasse(f) {
   if (f.durata && f.durata !== 8) p.set('durata', f.durata);
   if (f.livello && f.livello !== 1) p.set('livello', f.livello);
   if (f.seed) p.set('seed', f.seed);
-  if (f.voce) p.set('voce', '1');
+  if (!f.suoni) p.set('suoni', '0');
   if (f.prova) p.set('prova', '');
   const q = p.toString().replace(/prova=(&|$)/, 'prova$1');
   return location.origin + location.pathname + (q ? '?' + q : '');
 }
-const FORM = { modo: IMP.modo || '', durata: Math.round(IMP.durata / 60), livello: IMP.partenza, seed: IMP.seed, voce: VOCE.on, prova: QS.has('prova') };
+const FORM = { modo: IMP.modo || '', durata: Math.round(IMP.durata / 60), livello: IMP.partenza, seed: IMP.seed, suoni: SFX.on, prova: QS.has('prova') };
 function apriDocente(tab = tabDocente) {
   tabDocente = tab;
   const TABS = [['metodo', 'Come funziona'], ['link', 'Link per la classe'], ['classifica', 'Classifica'], ['sessione', 'Questa sessione']];
@@ -2263,9 +2175,9 @@ function apriDocente(tab = tabDocente) {
       <h4>Durata della sfida</h4><div class="riga-b">${[5, 8, 10, 12].map(m => scelta('durata', m, m + ' minuti')).join('')}</div>
       <h4>Livello di partenza della sfida</h4><div class="riga-b">${LIVELLI.map((d, i) => scelta('livello', i + 1, `${i + 1} · ${d.nome}`)).join('')}</div>
       <h4>Carte uguali per tutti anche nell'allenamento (modalità lezione)</h4><div class="riga-b"><input class="mi" id="mSeed" value="${f.seed || ''}" placeholder="es. 3A-lunedi" maxlength="24"><span class="mnota">vuoto = nell'allenamento ognuno ha carte diverse; nella sfida le carte sono già uguali per tutti nella giornata</span></div>
-      <h4>Altro</h4><div class="riga-b">${['voce', 'prova'].map(k => `<button class="mb ${f[k] ? 'on' : ''}" data-k="${k}" data-v="${!f[k]}" tabindex="-1">${k === 'voce' ? 'lettura a voce alta' : 'prova alla LIM, fuori classifica'}: ${f[k] ? 'sì' : 'no'}</button>`).join('')}</div>
+      <h4>Altro</h4><div class="riga-b">${['suoni', 'prova'].map(k => `<button class="mb ${f[k] ? 'on' : ''}" data-k="${k}" data-v="${!f[k]}" tabindex="-1">${k === 'suoni' ? 'suoni guida' : 'prova alla LIM, fuori classifica'}: ${f[k] ? 'sì' : 'no'}</button>`).join('')}</div>
       <div class="link"><code id="mUrl">${url}</code><button class="mb on" id="mCopia" tabindex="-1">${ICO.copia}copia il link</button><button class="mb" id="mApri" tabindex="-1">apri</button></div>`;
-    B.querySelectorAll('[data-k]').forEach(b => b.onclick = () => { const k = b.dataset.k, v = b.dataset.v; FORM[k] = k === 'voce' || k === 'prova' ? v === 'true' : k === 'modo' ? v : +v; apriDocente('link'); });
+    B.querySelectorAll('[data-k]').forEach(b => b.onclick = () => { const k = b.dataset.k, v = b.dataset.v; FORM[k] = k === 'suoni' || k === 'prova' ? v === 'true' : k === 'modo' ? v : +v; apriDocente('link'); });
     $('#mSeed').oninput = e => { FORM.seed = e.target.value.trim().replace(/[^\w-]/g, ''); $('#mUrl').textContent = linkClasse(FORM); };
     $('#mCopia').onclick = () => { const u = linkClasse(FORM); (navigator.clipboard ? navigator.clipboard.writeText(u) : Promise.reject()).then(() => { $('#mCopia').innerHTML = `${ICO.copia}copiato`; }).catch(() => { prompt('Copia il link:', u); }); };
     $('#mApri').onclick = () => { location.href = linkClasse(FORM); };
@@ -2390,7 +2302,6 @@ async function avvio() {
   Classifica.onCambio(aggiornaClassifica); aggiornaClassifica();
   aggiornaBottoni();
   $('#gSuono').onclick = () => { SFX.on = !SFX.on; aggiornaBottoni(); };
-  $('#gVoce').onclick = $('#homeVoce').onclick = e => { e.stopPropagation(); cambiaVoce(); };
   $('#gPausa').onclick = () => G.stato === 'pausa' ? confermaPausa(0) : mostraPausa();
   $('#gCasa').onclick = () => tornaHome();
   $('#pIndietro').onclick = $('#cIndietro').onclick = () => tornaHome();
