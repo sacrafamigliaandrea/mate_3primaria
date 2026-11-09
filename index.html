@@ -25,7 +25,10 @@
   --testo:#14203A; --testo2:#45526C; --testo3:#76839C;
   --verde:#2E7D4F; --verde-t:#E3F2E8; --ambra:#D98A00; --ambra2:#94590A; --ambra-t:#FFF2D9;
   --oro:#C99A1E; --oro2:#9C760C; --oro-t:#FBF1D2; --evid:#FFE98A;
-  --pk:#6D3FC0; --pk-t:#F1ECFA; --ph:#0B7A8A; --ph-t:#E4F3F5; --pda:#2F5FB8; --pda-t:#E6EDF9; --pu:#A63D8F; --pu-t:#F8E9F4;
+  /* colonne del valore posizionale: il codice delle «tre penne» dei libri di testo, quello della maestra
+     (u blu, da rosso, h verde); k viola, il quarto colore per le migliaia. Il rosso qui NON è un errore:
+     gli errori restano ambra. Contrasto su bianco ≥ 5:1 (le etichette CENTINAIA, DECINE sono piccole). */
+  --pk:#6D3FC0; --pk-t:#F1ECFA; --ph:#15803D; --ph-t:#E3F4E8; --pda:#D12C2C; --pda-t:#FCE9E9; --pu:#1D5FD1; --pu-t:#E6EEFB;
   --f:'Atkinson Hyperlegible','Avenir Next',system-ui,sans-serif;
   --fd:'Fredoka','Atkinson Hyperlegible',system-ui,sans-serif;
   --ombra2:0 2px 4px rgba(18,62,144,.08),0 22px 40px -18px rgba(18,62,144,.42);
@@ -309,7 +312,8 @@ h1,h2,h3,h4{font-weight:inherit}
 .slot.no{animation:scuoti .45s}
 .slot.no .cc,.slot.diff .cc{border-color:var(--ambra);background:var(--ambra-t);color:var(--ambra2);box-shadow:0 0 0 3px var(--ambra),0 4px 0 var(--ambra)}
 .slot.giusto .cc{border-color:var(--verde);background:var(--verde-t);color:var(--verde);box-shadow:0 0 0 3px var(--verde),0 4px 0 var(--verde)}
-.slot.guarda{box-shadow:0 0 0 5px var(--ambra);animation:pulsaGuarda 1s ease-in-out infinite}
+.slot.guarda{box-shadow:0 0 0 5px var(--ambra);animation:pulsaGuarda 1s ease-in-out infinite;border-color:var(--ambra)}
+.slot.guarda .cc{border-color:var(--ambra);box-shadow:0 4px 0 var(--ambra)}   /* la colonna da guardare diventa tutta ambra: accanto al rosso delle decine l'alone sembrerebbe rosso */
 @keyframes pulsaGuarda{50%{box-shadow:0 0 0 9px rgba(217,138,0,.35)}}
 .r-lab{justify-self:end;align-self:center;text-align:right;white-space:nowrap;font:600 clamp(13px,.95vw,18px)/1.15 var(--fd);color:var(--testo2)}
 .r-lab small{display:block;font:400 clamp(11px,.72vw,13px)/1.2 var(--f);color:var(--testo3)}
